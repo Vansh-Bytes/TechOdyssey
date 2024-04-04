@@ -1,0 +1,64 @@
+{% extends 'private/base.html' %}
+
+{% block main %}
+
+<link rel="stylesheet" href="{{url_for('static', filename='css/home.css')}}">
+<script src="{{url_for('static', filename='js/countdown.js')}}"></script>
+
+<div class="hero-section">
+    <div class="hero-content">
+        <h1>TechOdyssey</h1>
+        <!-- <p>Tech Fest @<a href="https://krmangalam.edu.in" target="_blank">K.R. Mangalam University</a>, Gurugram</p> -->
+        <div class="hero-buttons">
+            <button class="primary-button" onclick="window.location.href='/events'">Register Now</button>
+            <button class="secondary-button" onclick="window.location.href='/#events-section'">View Events</button>
+        </div>
+    </div>
+    <div class="event-metadata">
+        <div class="metadata">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+                <path
+                    d="M580-240q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Z" />
+            </svg>
+            <span>March 2021</span>
+        </div>
+        <div class="metadata">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+                <path
+                    d="M280-120v-80h160v-124q-49-11-87.5-41.5T296-442q-75-9-125.5-65.5T120-640v-40q0-33 23.5-56.5T200-760h80v-80h400v80h80q33 0 56.5 23.5T840-680v40q0 76-50.5 132.5T664-442q-18 46-56.5 76.5T520-324v124h160v80H280Zm0-408v-152h-80v40q0 38 22 68.5t58 43.5Zm400 0q36-13 58-43.5t22-68.5v-40h-80v152Z" />
+            </svg>
+            <span>7 Events</span>
+        </div>
+        <div class="metadata">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+                <path
+                    d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 400Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Z" />
+            </svg>
+            <span>K.R. Mangalam University</span>
+        </div>
+    </div>
+</div>
+<div class="counter-section">
+    <div class="counter">
+        <div class="countdown">
+            <div class="countdown-item">
+                <span id="days">00</span>
+                <span>Days</span>
+            </div>
+            <div class="countdown-item">
+                <span id="hours">00</span>
+                <span>Hours</span>
+            </div>
+            <div class="countdown-item">
+                <span id="minutes">00</span>
+                <span>Minutes</span>
+            </div>
+            <div class="countdown-item">
+                <span id="seconds">00</span>
+                <span>Seconds</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
