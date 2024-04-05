@@ -3,5 +3,5 @@
     "builds": [
         {"src": "/application/server.py", "use": "@vercel/python"}
     ],
-    "routes": [{"src": "/application/", "dest": "server.py"}]
+    "routes": [{"src": "/(.*)", "dest": "/application/server.py"}]
 }
