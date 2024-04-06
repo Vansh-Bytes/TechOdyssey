@@ -1,6 +1,6 @@
 function updateTime() {
     let now = new Date();
-    let targetDate = new Date("2024-04-25T00:00:00+05:30");
+    let targetDate = new Date("2024-05-02T00:00:00+05:30");
 
     let timeRemaining = targetDate - now;
 
@@ -14,12 +14,26 @@ function updateTime() {
     let minutesRemaining = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
     let secondsRemaining = Math.floor((timeRemaining % (1000 * 60)) / 1000);
 
+    if (daysRemaining < 10) {
+        daysRemaining = "0" + daysRemaining;
+    }
+
+    if (hoursRemaining < 10) {
+        hoursRemaining = "0" + hoursRemaining;
+    }
+
+    if (minutesRemaining < 10) {
+        minutesRemaining = "0" + minutesRemaining;
+    }
+
+    if (secondsRemaining < 10) {
+        secondsRemaining = "0" + secondsRemaining;
+    }
+
     document.getElementById("days").innerHTML = daysRemaining;
     document.getElementById("hours").innerHTML = hoursRemaining;
     document.getElementById("minutes").innerHTML = minutesRemaining;
     document.getElementById("seconds").innerHTML = secondsRemaining;
-
-    console.log("Time remaining: " + daysRemaining + "d " + hoursRemaining + "h " + minutesRemaining + "m " + secondsRemaining + "s");
 
     setTimeout(updateTime, 1000);
 }

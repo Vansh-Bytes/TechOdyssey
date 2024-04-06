@@ -1,15 +1,14 @@
 <link rel="stylesheet" href="{{url_for('static', filename='css/navbar.css')}}">
-<nav>
+<script src="{{url_for('static', filename='js/navbar.js')}}" defer></script>
+<nav class="navbar">
     <div class="logo">
         <a href="/"><img src="https://storage.techodyssey.dev/csi-logo.png" alt="TechOdyssey Logo"></a>
     </div>
     <ul>
         <li><a href="/">Home</a></li>
-        <li><a href="/#about-section">About</a></li>
         <li><a href="/#events-section">Events</a></li>
-        <li><a href="/#judges-section">Judges</a></li>
-        <li><a href="/#sponsor-section">Sponsors</a></li>
-        <li><a href="/techodyssey-team">Team</a></li>
         <li><a href="/#faq's-section">FAQ's</a></li>
+        <li><a href="/sponsor" class="sponsor">Sponsor Us</a></li>
+        <li><a href="/register" class="register">Register</a></li>
     </ul>
 </nav>

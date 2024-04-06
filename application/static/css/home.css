@@ -6,6 +6,10 @@ main {
     width: 100%;
 }
 
+h2 svg {
+    height: 30px !important;
+}
+
 .hero-section {
     display: flex;
     flex-direction: column;
@@ -14,55 +18,66 @@ main {
     text-align: center;
     width: 100%;
     min-height: calc(100vh - 70px);
+    position: relative;
 }
 
+
 .hero-section h1 {
-    font-size: 7rem;
+    font-size: 8rem;
     margin-bottom: 1rem;
-    font-weight: 700;
+    font-weight: 900;
     text-transform: uppercase;
     line-height: 5rem;
+    color: #FFF;
+    z-index: 1;
 }
+
 
 .hero-buttons {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 30px;
+    margin-top: 2rem;
 }
 
-.hero-section button {
-    padding: 10px 15px;
+button {
+    padding: 15px 30px;
     border: none;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
-.hero-section button.primary-button {
+button.primary-button {
+    background-color: #34736c;
+    color: #fff;
+    transition: 0.3s;
+    box-shadow: 3px 3px 1px 0 rgba(52, 115, 108, 0.5);
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    border: 1px solid #34736c;
+}
+
+button.primary-button:hover {
+    background-color: #000;
+    color: #FFF;
+    box-shadow: 3px 3px 1px 0 rgba(255, 255, 255, 0.5);
+    border: 1px solid #FFF;
+}
+
+button.secondary-button {
     background-color: #FFF;
     color: #000;
     font-size: 1.2rem;
     margin-top: 1rem;
     border: 1px solid #FFF;
+    box-shadow: 3px 3px 1px 0 rgba(255, 255, 255, 0.5);
 }
 
-.hero-section button.primary-button:hover {
+button.secondary-button:hover {
     background-color: #000;
     color: #FFF;
     border: 1px solid #FFF;
-}
-
-.hero-section button.secondary-button {
-    background-color: #000;
-    color: #FFF;
-    font-size: 1.2rem;
-    margin-top: 1rem;
-    border: 1px solid #FFF;
-}
-
-.hero-section button.secondary-button:hover {
-    background-color: #FFF;
-    color: #000;
 }
 
 .event-metadata {
@@ -80,6 +95,7 @@ main {
     align-items: center;
     justify-content: center;
     gap: 5px;
+    padding: 10px 15px;
 }
 
 .event-metadata .metadata svg {
@@ -100,7 +116,7 @@ main {
     justify-content: center;
     text-align: center;
     width: 100%;
-    background-color: #FFF;
+    background-image: linear-gradient(90deg, #1C403C 0%, #34736C 100%);
     padding: 30px 20px;
     margin-top: 50px;
 }
@@ -121,19 +137,7 @@ main {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 20px;
-}
-
-.counter-section .counter .countdown span {
-    font-size: 1.2rem;
-    font-weight: 400;
-    color: #000;
-}
-
-.counter-section .counter .countdown svg {
-    width: 25px;
-    height: 25px;
-    fill: #000;
+    gap: 20%;
 }
 
 .counter-section .counter .countdown .countdown-item {
@@ -141,5 +145,320 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 5px;
 }
+
+.counter-section .counter .countdown .countdown-item span {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #FFF;
+}
+
+.counter-section .counter .countdown .countdown-item span.time {
+    font-size: 5rem;
+    font-weight: 700;
+    color: #FFF;
+    padding: 0px 15px;
+    font-family: 'Noto Sans Mono', monospace;
+
+}
+
+
+.events-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    padding: 100px 20px;
+    background: #000;
+    position: relative;
+}
+
+.doodles svg {
+    fill: #34736C !important;
+}
+
+#doodle1,
+#doodle2,
+#doodle3,
+#doodle4,
+#doodle5,
+#doodle6 {
+    position: absolute;
+    z-index: 0;
+}
+
+#doodle1 {
+    top: 20px;
+    left: 20px;
+    height: 100px;
+}
+
+#doodle2 {
+    bottom: 50px;
+    left: 40px;
+    height: 80px;
+}
+
+#doodle3 {
+    top: 200px;
+    right: 10px;
+    height: 150px;
+}
+
+#doodle4 {
+    bottom: 20px;
+    right: 100px;
+    height: 120px;
+}
+
+#doodle5 {
+    top: 50%;
+    left: 30px;
+    height: 150px;
+}
+
+#doodle6 {
+    top: 50%;
+    right: 20px;
+    height: 100px;
+}
+
+
+.events-section h2 {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #FFF;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+    z-index: 1;
+}
+
+.events-section h2 span {
+    padding: 0 20px;
+}
+
+.events {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.events:nth-last-child(1) {
+    margin-right: auto !important;
+}
+
+.event {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+    background: #000;
+    border: 1px solid #FFF;
+    transition: 0.3s;
+    width: 350px;
+    height: 400px;
+}
+
+.event-logo {
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+#reel-craft-logo {
+    padding: 30px;
+}
+
+#reel-craft-logo svg {
+    width: 60px !important;
+    height: 60px !important;
+}
+
+.event-logo svg {
+    width: 80px !important;
+    height: 80px !important;
+    fill: #FFF !important;
+    transition: 0.3s !important;
+    animation: 0.3s !important;
+}
+
+.event-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: left;
+    gap: 10px;
+}
+
+.event-details h3 {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #FFF;
+    text-transform: uppercase;
+}
+
+.event-details p {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #FFF;
+}
+
+.event-details button {
+    width: 100%;
+    border: 1px solid #1C403C;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-left: auto;
+}
+
+
+.sponsor-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    padding: 100px 20px;
+    position: relative;
+    min-height: calc(100vh - 70px);
+}
+
+.sponsor-section h2 {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #FFF;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 100px;
+    z-index: 1;
+}
+
+.sponsor-section h2 span {
+    padding: 0 20px;
+}
+
+
+.call-to-action-sponsor a {
+    text-decoration: none;
+    color: #FFF;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.faq-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    padding: 100px 20px;
+    position: relative;
+    background: #000;
+}
+
+.faq-section h2 {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #FFF;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 100px;
+    z-index: 1;
+}
+
+.faq-section h2 span {
+    padding: 0 20px;
+}
+
+.faq {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.faq-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+    background: #000;
+    border: 1px solid #FFF;
+    transition: 0.3s;
+    width: 100%;
+}
+
+.faq-item h3 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.faq-item h3 svg {
+    width: 30px;
+    height: 30px;
+    fill: #FFF;
+}
+
+.faq-item h3 span {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #FFF;
+    text-transform: uppercase;
+    width: 100%;
+    text-align: left;
+
+}
+
+.faq-item p {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #FFF;
+    text-align: left;
+}
+
+.faq-item p.hidden {
+    display: none;
+    transition: 0.3s;
+}
+
+.call-to-action-faq {
+    margin-top: 50px;
+}
+
+.call-to-action-faq a {
+    text-decoration: none;
+    color: #FFF;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+

@@ -39,3 +39,26 @@ nav ul li a:hover {
     background-color: #fff;
     color: #000;
 }
+
+.register {
+    background-color: #34736c;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 3px 3px 1px 0 rgba(52, 115, 108, 0.5);
+    border: 1px solid #34736c;
+}
+
+.register:hover {
+    background-color: #000;
+    color: #fff;
+    box-shadow: 3px 3px 1px 0 rgba(255, 255, 255, 0.5);
+    border: 1px solid #fff;
+}
+
+.navbar-scrolled {
+    background-color: #000000;
+    animation: fadeIn;
+}
