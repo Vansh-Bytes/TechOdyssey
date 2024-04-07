@@ -443,7 +443,9 @@ button.secondary-button:hover {
     .event-metadata {
         flex-direction: column;
         gap: 0px;
-        bottom: 150px;
+        margin-top: 50px;
+        position: relative !important;
+        bottom: 0;
     }
 
     .event-metadata .metadata {
@@ -497,12 +499,6 @@ button.secondary-button:hover {
     .faq-item p {
         font-size: 1rem;
     }
-    
-
-
-    
-
-
 
 
 }
