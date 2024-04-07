@@ -433,6 +433,7 @@ button.secondary-button:hover {
     }
 
     .hero-buttons {
+        margin-top: 50px;
         flex-direction: column;
         gap: 20px;
     }
@@ -440,14 +441,14 @@ button.secondary-button:hover {
     .event-metadata {
         flex-direction: column;
         gap: 0px;
-        bottom: 20px;
+        bottom: 10px;
     }
 
     .event-metadata .metadata {
         display: flex;
         flex-direction: row;
         gap: 10px;
-        padding: 10px;
+        padding: 5px;
     }
 
     .counter-section {
