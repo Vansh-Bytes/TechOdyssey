@@ -62,3 +62,134 @@ nav ul li a:hover {
     background-color: #000000;
     animation: fadeIn;
 }
+
+.hamburger {
+    display: none;
+    z-index: 1000;
+}
+
+.mobile-nav-links {
+    display: flex;
+    position: fixed;
+    top: 70px;
+    right: -100%;
+    background-color: #000;
+    z-index: 1000;
+    padding: 20px;
+    gap: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    min-width: 300px;
+    min-height: 100vh;
+    transition: 0.3s;
+}
+
+.mobile-nav-links ul li {
+    list-style: none;
+    padding: 10px 0;
+}
+
+.mobile-nav-links ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 10px 15px;
+    transition: 0.3s;
+}
+
+.mobile-nav-links a:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.mobile-nav-links-active {
+    right: 0;
+    transition: 0.5s;
+}
+
+@media screen and (max-width: 768px) {
+    nav {
+        padding: 10px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: #000 !important;
+    }
+
+    nav .logo img {
+        width: 40px;
+        height: auto;
+        background-color: #fff;
+        border-radius: 50%;
+    }
+
+    nav ul {
+        display: none;
+    }
+
+    nav .hamburger {
+        display: block;
+        cursor: pointer;
+        fill: #fff;
+    }
+
+    .mobile-nav-links ul {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 20px;
+        width: 100%;
+    }
+
+    .mobile-nav-links ul li {
+        width: 100%;
+    }
+    .mobile-nav-links ul li a{
+        width: 100%;
+        color: #fff;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: 500;
+        padding: 10px 15px;
+        transition: 0.3s;
+        text-transform: uppercase;
+    }
+
+    .mobile-nav-links ul li a:hover {
+        background-color: #000;
+        color: #fff;
+    }
+
+    .register {
+        background-color: #34736c;
+        color: #fff;
+        padding: 15px 20px !important;
+        border: none;
+        cursor: pointer;
+        transition: 0.3s;
+        box-shadow: 3px 3px 1px 0 rgba(52, 115, 108, 0.5);
+        border: 1px solid #34736c;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .navbar-scrolled {
+        background-color: #000000;
+        animation: fadeIn;
+    }
+    
+}

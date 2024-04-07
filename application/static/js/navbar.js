@@ -24,3 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('scroll', checkScroll);
     window.addEventListener('resize', checkResize);
 });
+
+function toggleMobileNav() {
+    document.querySelector('.mobile-nav-links').classList.toggle('mobile-nav-links-active');
+}

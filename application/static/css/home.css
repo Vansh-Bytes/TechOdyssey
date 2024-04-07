@@ -156,7 +156,6 @@ button.secondary-button:hover {
     color: #FFF;
     padding: 0px 15px;
     font-family: 'Noto Sans Mono', monospace;
-
 }
 
 
@@ -176,11 +175,6 @@ button.secondary-button:hover {
     position: relative;
     z-index: 1;
 }
-
-.doodles svg {
-    fill: #34736C !important;
-}
-
 
 .events-section h2 {
     font-size: 3rem;
@@ -422,3 +416,90 @@ button.secondary-button:hover {
     text-transform: uppercase;
 }
 
+@media screen and (max-width: 768px) {
+
+    * {
+        box-sizing: border-box;
+        font-size: 12px;
+    }
+    
+    .hero-section {
+        padding: 100px 20px;
+    }
+
+    .hero-section h1 {
+        font-size: 5.5rem;
+        line-height: 1;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .event-metadata {
+        flex-direction: column;
+        gap: 0px;
+        bottom: 20px;
+    }
+
+    .event-metadata .metadata {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .counter-section {
+        padding: 50px 20px;
+    }
+
+    .counter-section .counter .countdown {
+        flex-direction: row;
+        gap: 10px;
+    }
+
+    .counter-section .counter .countdown .countdown-item span.time {
+        font-size: 3rem;
+        font-weight: 700;
+        color: #FFF;
+        padding: 0px 15px;
+        font-family: 'Noto Sans Mono', monospace;
+    }
+
+    .events-section {
+        padding: 100px 20px;
+    }
+
+    .events-section h2 span {
+        font-size: 4rem;
+    }
+
+    .event {
+        width: 100%;
+    }
+
+    .sponsor-section h2 span {
+        font-size: 4rem;
+    }
+
+    .faq-section h2 span {
+        font-size: 4rem;
+    }
+
+    .faq-item h3 span {
+        font-size: 1.2rem;
+    }
+
+    .faq-item p {
+        font-size: 1rem;
+    }
+    
+
+
+    
+
+
+
+
+}
