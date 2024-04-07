@@ -1,0 +1,70 @@
+body {
+    background-color: #000 !important;
+    background-image: none !important;
+}
+
+
+main {
+    padding: 50px 20px;
+}
+
+h1 {
+    color: #FFF;
+    font-size: 3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: #FFF;
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+ul {
+    list-style-type: none;
+    margin-bottom: 20px;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+a {
+    color: #FFF;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+strong {
+    color: #FFF;
+    text-transform: uppercase;
+}
+
+.faq {
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.faq strong {
+    font-size: 1.2rem;
+}
+
+.faq p {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.faq p:last-child {
+    margin-bottom: 0;
+}
+
+#feedback {
+    margin-top: 20px;
+}

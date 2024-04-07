@@ -1,0 +1,35 @@
+{% extends 'private/base.html' %}
+
+{% block main %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/support.css')}}">
+<h1 id="support">Support</h1>
+<h2 id="contact-information">Contact Information</h2>
+<ul>
+    <li><strong>Address:</strong> Sohna Road, Gurugram, Haryana 122103</li>
+    <li><strong>Email:</strong> support@techodyssey.dev</li>
+    <li><strong>Phone:</strong> 011-4888-4888
+    </li>
+</ul>
+<h2 id="frequently-asked-questions-faqs-">Frequently Asked Questions (FAQs)</h2>
+<div class="faq">
+
+    <p><strong>Q: How can I register for Tech Odyssey?</strong><br>A: You can register for Tech Odyssey by visiting our
+        website and following the registration instructions provided. Registration fees are applicable and may vary for
+        certain events.</p>
+    <p><strong>Q: What events are included in Tech Odyssey?</strong><br>A: Tech Odyssey includes various events such as
+        web
+        development, competitive coding, e-sports, treasure hunts, quizzes, and more exciting activities designed to
+        create
+        a memorable experience for all participants.</p>
+</div>
+<h2 id="technical-support">Technical Support</h2>
+<p>If you encounter any technical issues while registering or participating in Tech Odyssey, please don&#39;t hesitate
+    to reach out to our technical support team at support@techodyssey.dev or call us at the provided phone numbers.
+    We&#39;re here to help resolve any issues you may encounter.</p>
+<h2 id="feedback">Feedback</h2>
+<p>We value your feedback and suggestions. If you have any ideas for improving Tech Odyssey or if there&#39;s anything
+    you&#39;d like to share with us, please feel free to email us at support@techodyssey.dev. Your input helps us make
+    Tech Odyssey a better experience for everyone.</p>
+<p>Thank you for choosing Tech Odyssey. We look forward to seeing you at the event!</p>
+
+{% endblock %}
