@@ -173,6 +173,7 @@ button.secondary-button:hover {
     background-position: center;
     background-repeat: no-repeat;
     position: relative;
+    background-attachment: fixed;
     z-index: 1;
 }
 
@@ -327,6 +328,7 @@ button.secondary-button:hover {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .faq-section h2 {
