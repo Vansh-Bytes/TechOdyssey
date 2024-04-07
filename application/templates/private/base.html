@@ -47,7 +47,18 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
-    <script src="{{url_for('static', filename='js/app.js')}}" defer></script>
+    <script src="{{url_for('static', filename='js/app.js')}}"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2V1PM738RQ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-2V1PM738RQ');
+    </script>
+
 </head>
 
 <body>
