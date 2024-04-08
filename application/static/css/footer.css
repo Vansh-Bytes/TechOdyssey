@@ -1,38 +1,76 @@
 footer {
     background-color: #000;
-    padding: 20px;
+    padding: 10px 20px;
 }
 
 footer .container {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-    width: 100%;
-    gap: 20px;
 }
 
-footer .container p {
-    color: white;
-    font-size: 1.2rem;
-    text-align: center;
-}
-
-.fa-heart {
-    color: red;
-}
-
-footer .container ul {
+footer .container .row {
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     gap: 20px;
 }
 
-footer .container ul li {
+footer .container .row div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+footer .container .row div a {
+    color: #fff;
+    text-decoration: none;
+}
+
+footer .container .social-media {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+footer .container .social-media li {
     list-style: none;
 }
 
-footer .container ul li a {
-    color: white;
-    text-decoration: none;
-    font-size: 1.2rem;
+@media (max-width: 768px) {
+    footer .container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    footer .container .row {
+        flex-direction: column-reverse;
+        justify-content: flex-start;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+
+
+    footer .container .row p{
+        margin-left: 0;
+        text-align: left;
+    }
+
+    .footer .container .row a {
+        margin-left: 0;
+        text-align: left;
+        width: max-content;
+    }
+
+    footer .container .social-media {
+        flex-direction: row;
+        gap: 20px;
+    }
 }

@@ -2,10 +2,19 @@
 <link rel="stylesheet" href="{{url_for('static', filename='css/footer.css')}}">
 <footer>
     <div class="container">
-        <p class="text-center">Made with <i class="fas fa-heart"></i> by Team TechOdyssey</p>
-        <ul>
+        <div class="row">
+            <p class="text-center">&copy; 2024, Tech Odyssey</p>
+            <div>
+                <a href="{{url_for('privacy_policy')}}" class="text-center">Privacy Policy</a>
+                <a href="{{url_for('terms_of_service')}}" class="text-center">Terms of Service</a>
+            </div>
+
+
+        </div>
+        <div class="social-media">
             <li><a href="mailto:support@techodyssey.dev" target="_blank"><i class="fas fa-envelope"></i></a></li>
-            <li><a href="https://www.instagram.com/techodysseykrmu" target="_blank"><i class="fab fa-instagram"></i></a></li>
-        </ul>
+            <li><a href="https://www.instagram.com/techodysseykrmu" target="_blank"><i class="fab fa-instagram"></i></a>
+            </li>
+        </div>
     </div>
 </footer>

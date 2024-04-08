@@ -157,18 +157,18 @@ def support():
 
 
 @app.route("/terms-of-service")
-def tos():
-    return render_template("public/tos.html")
+def terms_of_service():
+    return render_template("public/terms-of-service.html")
 
 
 @app.route("/privacy-policy")
-def privacy():
+def privacy_policy():
     return render_template("public/privacy-policy.html")
 
 
 @app.route("/cancellation")
-def cancellation():
-    return render_template("public/cancellation.html")
+def cancelation_policy():
+    return render_template("public/cancellation-policy.html")
 
 
 # Auth routes
