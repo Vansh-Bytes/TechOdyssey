@@ -135,7 +135,7 @@ initialize_social_login(session, app, config)
 
 @app.before_request
 def before_request():
-    if "user" in session:
+    if session.get("user") is not None:
         if session["user"].get("provider") is None:
             if session["user"].get("verified_email") is not None:
                 session["user"] = generate_user_session(session["user"], "google")
@@ -177,6 +177,12 @@ def cancelation_policy():
 @app.route("/authentication/register")
 def auth_register():
     return render_template("auth/authentication.html")
+
+@app.route("/authentication/sign-out")
+def auth_sign_out():
+    session.pop("user", None)
+    return redirect(url_for("index"))
+
 
 # Sponsors routes
 
