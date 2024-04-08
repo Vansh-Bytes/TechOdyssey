@@ -1,5 +1,6 @@
 import os
 import redis
+import time
 from functools import wraps
 from dotenv import load_dotenv
 from pymongo import MongoClient
@@ -21,6 +22,53 @@ def is_user_authenticated(func):
     return wrapper
 
 
+def generate_user_session(user, provider):
+    if provider == "google":
+        mongodb_cursor["users"].find_one_and_update(
+            {"user_email": user["email"].lower()},
+            {
+                "$set": {
+                    "user_info": {
+                        "user_name": user["name"],
+                        "user_avatar_url": user["picture"],
+                        "user_provider": provider,
+                    },
+                    "account_info": {
+                        "last_login": time.time(),
+                    },
+                }
+            },
+            upsert=True,
+        )
+    elif provider == "github":
+        mongodb_cursor["users"].find_one_and_update(
+            {"user_email": user["email"].lower()},
+            {
+                "$set": {
+                    "user_info": {
+                        "user_name": user["name"],
+                        "user_avatar_url": user["avatar_url"],
+                        "user_provider": provider,
+                    },
+                    "account_info": {
+                        "last_login": time.time(),
+                    },
+                }
+            },
+            upsert=True,
+        )
+
+    user_info = mongodb_cursor["users"].find_one({"user_email": user["email"].lower()})
+
+    return {
+        "id": str(user_info["_id"]),
+        "email": user_info["user_email"],
+        "name": user_info["user_info"]["user_name"],
+        "user_avatar_url": user_info["user_info"]["user_avatar_url"],
+        "provider": user_info["user_info"]["user_provider"],
+    }
+
+
 # Load environment variables
 load_dotenv()
 
@@ -32,7 +80,10 @@ mongdb_connection = MongoClient(
 mongodb_cursor = mongdb_connection["prod"]
 
 # Initialize Social OAuth configuration
-config = Config(social_auth_providers=["google", "github"], application_root_url="https://techodyssey.dev")
+config = Config(
+    social_auth_providers=["google", "github"],
+    application_root_url="https://techodyssey.dev",
+)
 
 config.google_auth(
     google_auth_client_id=os.getenv("GOOGLE_CLIENT_ID"),
@@ -77,6 +128,20 @@ app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
 # Flask OAuth initialization
 
 initialize_social_login(session, app, config)
+
+
+# Request Preprocessor
+
+
+@app.before_request
+def before_request():
+    if "user" in session:
+        if session["user"].get("provider") is None:
+            if session["user"].get("verified_email") is not None:
+                session["user"] = generate_user_session(session["user"], "google")
+            else:
+                session["user"] = generate_user_session(session["user"], "github")
+
 
 # Basic routes
 
@@ -124,9 +189,11 @@ def auth_user():
 
 # Sponsors routes
 
+
 @app.route("/sponsors/enquiry")
 def sponsors_enquiry():
     return render_template("sponsors/enquiry.html")
+
 
 if __name__ == "__main__":
     app.run(debug=True)

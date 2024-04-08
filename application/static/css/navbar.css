@@ -22,6 +22,9 @@ nav .logo img {
 
 nav ul {
     display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     list-style: none;
     gap: 10px;
 }
@@ -119,6 +122,24 @@ nav ul li a:hover {
     to {
         opacity: 1;
     }
+}
+
+.user_info {
+    display: flex;
+    align-items: center;
+}
+
+.user_info:hover .user_dropdown {
+    background-color: transparent;
+}
+
+.user_info img {
+    width: 50px;
+    height: 50px;
+}
+
+.user_info a:hover {
+    background-color: transparent;
 }
 
 .mobile-nav-links-active {
