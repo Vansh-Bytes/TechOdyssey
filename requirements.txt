@@ -3,4 +3,4 @@ redis
 pymongo
 python-dotenv
 Flask-Session
-flask_social_oauth
+flask-social-oauth
