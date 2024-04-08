@@ -1,0 +1,68 @@
+main {
+    min-height: calc(100vh - 70px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+button {
+    padding: 15px 30px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: max-content;
+}
+
+button svg {
+    height: 25px;
+    width: 25px;
+    margin-right: 10px;
+}
+
+button.primary-button {
+    background-color: #34736c;
+    color: #fff;
+    transition: 0.3s;
+    box-shadow: 3px 3px 1px 0 rgba(52, 115, 108, 0.5);
+    font-size: 1.2rem;
+    border: 1px solid #34736c;
+}
+
+button.primary-button:hover {
+    background-color: #000;
+    color: #FFF;
+    box-shadow: 3px 3px 1px 0 rgba(255, 255, 255, 0.5);
+    border: 1px solid #FFF;
+}
+
+button.primary-button span {
+    color: #FFF;
+}
+
+button.secondary-button {
+    background-color: #FFF;
+    color: #000;
+    font-size: 1.2rem;
+    border: 1px solid #FFF;
+    box-shadow: 3px 3px 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+button.secondary-button:hover {
+    background-color: #000;
+    color: #FFF;
+    border: 1px solid #FFF;
+}
+
+button.secondary-button span {
+    color: #000;
+}
+
+button.secondary-button:hover span {
+    color: #FFF;
+}
