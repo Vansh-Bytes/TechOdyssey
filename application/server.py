@@ -32,7 +32,7 @@ mongdb_connection = MongoClient(
 mongodb_cursor = mongdb_connection["prod"]
 
 # Initialize Social OAuth configuration
-config = Config(social_auth_providers=["google"])
+config = Config(social_auth_providers=["google", "github"], application_root_url="https://techodyssey.dev")
 
 config.google_auth(
     google_auth_client_id=os.getenv("GOOGLE_CLIENT_ID"),
