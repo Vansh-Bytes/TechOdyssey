@@ -178,15 +178,6 @@ def cancelation_policy():
 def auth_register():
     return render_template("auth/authentication.html")
 
-
-@app.route("/authentication/user")
-def auth_user():
-    if "user" in session:
-        return jsonify({"user": session["user"]})
-    else:
-        return redirect(url_for("auth_register"))
-
-
 # Sponsors routes
 
 
