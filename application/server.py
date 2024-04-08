@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from pymongo import MongoClient
 from flask_session import Session
 from flask_social_oauth import Config, initialize_social_login
-from flask import Flask, render_template, redirect, url_for, request, session, jsonify
+from flask import Flask, render_template, redirect, url_for, session, jsonify
 
 # Helper functions
 

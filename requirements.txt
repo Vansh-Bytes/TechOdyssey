@@ -1,1 +1,6 @@
 flask
+redis
+pymongo
+python-dotenv
+Flask-Session
+flask_social_oauth
