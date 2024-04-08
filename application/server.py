@@ -122,5 +122,11 @@ def auth_user():
         return redirect(url_for("auth_register"))
 
 
+# Sponsors routes
+
+@app.route("/sponsors/enquiry")
+def sponsors_enquiry():
+    return render_template("sponsors/enquiry.html")
+
 if __name__ == "__main__":
     app.run(debug=True)

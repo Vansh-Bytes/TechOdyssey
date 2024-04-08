@@ -1,0 +1,133 @@
+/* {% extends 'private/base.html' %}
+
+{% block main %}
+
+<link rel="stylesheet" href="{{url_for('static', filename='css/sponsor-enquiry.css')}}">
+
+<h1 id="sponsor-enquiry">Sponsor Enquiry</h1>
+<p>Thank you for your interest in sponsoring Tech Odyssey. Please fill out the form below to get in touch with us.</p>
+
+<form id="sponsor-enquiry-form" method="post">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="company">Company:</label>
+    <input type="text" id="company" name="company" required>
+
+    <label for="message">Message:</label>
+    <textarea id="message" name="message" required></textarea>
+
+    <button type="submit">Submit</button>
+</form>
+
+{% endblock %} */
+
+main {
+    min-height: calc(100vh - 70px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    padding: 20px;
+}
+
+#sponsor-enquiry {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    width: 80%;
+}
+
+p {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    width: 80%;
+}
+
+#sponsor-enquiry-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 80%;
+    text-align: left;
+}
+
+#sponsor-enquiry-form label {
+    margin-top: 1rem;
+}
+
+#sponsor-enquiry-form input,
+#sponsor-enquiry-form textarea {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    border: 1px solid #ccc;
+    height: 50px;
+    color: #000;
+    font-size: 1rem;
+}
+
+#sponsor-enquiry-form textarea {
+    height: 200px;
+}
+
+#sponsor-enquiry-form input:focus,
+#sponsor-enquiry-form textarea:focus {
+    outline: none;
+}
+
+button {
+    padding: 10px 25px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-left: auto;
+}
+
+button.primary-button {
+    background-color: #34736c;
+    color: #fff;
+    transition: 0.3s;
+    box-shadow: 3px 3px 1px 0 rgba(52, 115, 108, 0.5);
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    border: 1px solid #34736c;
+}
+
+button.primary-button:hover {
+    background-color: #000;
+    color: #FFF;
+    box-shadow: 3px 3px 1px 0 rgba(255, 255, 255, 0.5);
+    border: 1px solid #FFF;
+}
+
+@media screen and (max-width: 768px) {
+    #sponsor-enquiry {
+        font-size: 2rem;
+    }
+
+    p {
+        font-size: 0.8rem;
+    }
+
+    #sponsor-enquiry-form input,
+    #sponsor-enquiry-form textarea {
+        height: 40px;
+    }
+
+    #sponsor-enquiry-form textarea {
+        height: 150px;
+    }
+
+    button.primary-button {
+        font-size: 1rem;
+    }
+
+    button {
+        padding: 10px 20px;
+    }
+}
