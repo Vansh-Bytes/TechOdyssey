@@ -26,5 +26,19 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function toggleMobileNav() {
-    document.querySelector('.mobile-nav-links').classList.toggle('mobile-nav-links-active');
+    if (document.querySelector('.mobile-nav-links').classList.contains('mobile-nav-links-active')) {
+        document.querySelector('.mobile-nav-links').classList.remove('mobile-nav-links-active');
+    }
+    else {
+        document.querySelector('.mobile-nav-links').classList.add('mobile-nav-links-active');
+        document.addEventListener('click', function (e) {
+            if (e.target.classList.contains('mobile-nav-links') || e.target.classList.contains('mobile-nav-link') || e.target.classList.contains('hamburger') || e.target.classList.contains('hamburger-icon')) {
+                return;
+            }
+            else {
+                console.log(e.target);
+                document.querySelector('.mobile-nav-links').classList.remove('mobile-nav-links-active');
+            }
+        });
+    }
 }

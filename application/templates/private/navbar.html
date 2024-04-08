@@ -15,34 +15,32 @@
         <li><a href="/user/events">My Events</a></li>
         <li>
             <div class="user_info">
-                <a href="/authentication/sign-out"><img src="{{session.user.user_avatar_url}}" alt="Profile Picture" title="Sign Out"></a>
+                <a href="/authentication/sign-out"><img src="{{session.user.user_avatar_url}}" alt="Profile Picture"
+                        title="Sign Out"></a>
             </div>
         </li>
         {% endif %}
     </ul>
+    <div class="user_info user_info_mobile">
+        <a href="/authentication/sign-out"><img src="{{session.user.user_avatar_url}}" alt="Profile Picture"
+                title="Sign Out">
+        </a>
+    </div>
     <div class="hamburger" onclick="toggleMobileNav()">
-        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
-            <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
+        <svg class="hamburger-icon" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+            <path class="hamburger-icon" d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
         </svg>
     </div>
     <div class="mobile-nav-links">
         <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/#events-section">Events</a></li>
-            <li><a href="/#faq's-section">FAQ's</a></li>
+            <li><a href="/" class="mobile-nav-link">Home</a></li>
+            <li><a href="/#events-section" class="mobile-nav-link">Events</a></li>
+            <li><a href="/#faq's-section" class="mobile-nav-link">FAQ's</a></li>
             {% if session.get('user') is none %}
-            <li><a href="/sponsors/enquiry" class="sponsor">Sponsor Us</a></li>
-            <li><a href="/authentication/register" class="register">Register</a></li>
+            <li><a href="/sponsors/enquiry" class="sponsor mobile-nav-link">Sponsor Us</a></li>
+            <li><a href="/authentication/register" class="register mobile-nav-link">Register</a></li>
             {% else %}
-            <li>
-                <div class="user_info">
-                    <a href="/profile"><img src="{{session.user.user_avatar_url}}" alt="Profile Picture"></a>
-                    <div class="user_dropdown">
-                        <a href="/user/registered-events">Registered Events</a>
-                        <a href="/authentication/logout">Logout</a>
-                    </div>
-                </div>
-            </li>
+            <li><a href="/user/events" class="mobile-nav-link">My Events</a></li>
             {% endif %}
         </ul>
     </div>

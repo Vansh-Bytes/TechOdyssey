@@ -142,6 +142,10 @@ nav ul li a:hover {
     background-color: transparent;
 }
 
+.user_info_mobile {
+    display: none;
+}
+
 .mobile-nav-links-active {
     right: 0;
     transition: 0.5s;
@@ -220,5 +224,38 @@ nav ul li a:hover {
         background-color: #000000;
         animation: fadeIn;
     }
+
+    .user_info_mobile {
+        display: block;
+    }
+
+    .user_info {
+        display: block;
+        margin-left: auto;
+    }
+
+    .user_info img {
+        width: 40px;
+        height: 40px;
+    }
+    .user_info a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: 500;
+        padding: 10px 15px;
+        transition: 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 10px;
+    }
+
+    .user_info a:hover {
+        background-color: #000;
+        color: #fff;
+    }
+
+    .user_info p {}
     
 }
