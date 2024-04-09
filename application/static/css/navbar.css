@@ -136,6 +136,7 @@ nav ul li a:hover {
 .user_info img {
     width: 50px;
     height: 50px;
+    border-radius: 50%;
 }
 
 .user_info a:hover {
@@ -237,6 +238,7 @@ nav ul li a:hover {
     .user_info img {
         width: 40px;
         height: 40px;
+        border-radius: 50%;
     }
     .user_info a {
         color: #fff;
