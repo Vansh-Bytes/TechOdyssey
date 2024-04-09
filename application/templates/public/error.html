@@ -1,0 +1,14 @@
+{% extends 'private/base.html' %}
+
+{% block main %}
+
+<link rel="stylesheet" href="/static/css/error.css">
+
+<div class="error-container">
+    <h1>{{error_code}}</h1>
+    <h2>{{error_message}}</h2>
+    <p>{{error_description}}</p>
+    <button class="primary-button" onclick="window.location.href='/';">Go Home</button>
+</div>
+
+{% endblock %}

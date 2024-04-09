@@ -7,9 +7,9 @@
     <ul class="nav-links">
         <li><a href="/">Home</a></li>
         <li><a href="/#events-section">Events</a></li>
-        <li><a href="/#faq's-section">FAQ's</a></li>
-        {% if session.get('user') is none %}
         <li><a href="/team">Team</a></li>
+        {% if session.get('user') is none %}
+        <li><a href="/#faq's-section">FAQ's</a></li>
         <li><a href="/authentication/register" class="register">Register</a></li>
         {% else %}
         <li><a href="/user/events">My Events</a></li>

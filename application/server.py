@@ -184,13 +184,11 @@ def auth_sign_out():
     return redirect(url_for("index"))
 
 
-# Sponsors routes
+# Error handlers
 
-
-@app.route("/sponsors/enquiry")
-def sponsors_enquiry():
-    return render_template("sponsors/enquiry.html")
-
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template("public/error.html", error_code=404, error_message="The requested page was not found.", error_description="The page you are looking for might have been removed, had its name changed, or is temporarily unavailable."), 404
 
 if __name__ == "__main__":
     app.run(debug=True)
