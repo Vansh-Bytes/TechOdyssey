@@ -188,6 +188,7 @@ button.secondary-button:hover {
     justify-content: center;
     margin-bottom: 50px;
     z-index: 1;
+    white-space: nowrap;
 }
 
 .events-section h2 span {

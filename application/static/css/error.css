@@ -3,4 +3,53 @@ main {
     justify-content: center;
     align-items: center;
     min-height: calc((100vh - 70px));
+    padding: 0 20px;
+}
+
+.error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.error-container h1 {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.error-container h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.error-container p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+button {
+    padding: 10px 30px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button.primary-button {
+    background-color: #34736c;
+    color: #fff;
+    transition: 0.3s;
+    box-shadow: 3px 3px 1px 0 rgba(52, 115, 108, 0.5);
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    border: 1px solid #34736c;
+}
+
+button.primary-button:hover {
+    background-color: #000;
+    color: #FFF;
+    box-shadow: 3px 3px 1px 0 rgba(255, 255, 255, 0.5);
+    border: 1px solid #FFF;
 }
