@@ -110,7 +110,7 @@ config.github_auth(
 sentry_sdk.init(
     dsn="https://a151e83cec6feb34f0b36bf6d14d0244@o4504045228720128.ingest.us.sentry.io/4507068209102848",
     enable_tracing=True,
-    traces_sample_rate=1,     
+    traces_sample_rate=1,
     profiles_sample_rate=0.2,
 )
 
@@ -199,21 +199,26 @@ def auth_sign_out():
 
 # Event routes
 
+
 @app.route("/events/battle-blitz")
 def event_battle_blitz():
     return render_template("events/battle-blitz.html")
+
 
 @app.route("/events/treasure-quest")
 def event_treasure_quest():
     return render_template("events/treasure-quest.html")
 
+
 @app.route("/events/code-clash")
 def event_code_clash():
     return render_template("events/code-clash.html")
 
+
 @app.route("/events/web-dash")
 def event_web_dash():
     return render_template("events/web-dash.html")
+
 
 @app.route("/events/reel-craft")
 def event_reel_craft():
@@ -233,6 +238,19 @@ def page_not_found(error):
             error_description="The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.",
         ),
         404,
+    )
+
+
+@app.errorhandler(500)
+def internal_server_error(error):
+    return (
+        render_template(
+            "public/error.html",
+            error_code=500,
+            error_message="Something went wrong.",
+            error_description="The server encountered a situation it doesn't know how to handle.",
+        ),
+        500,
     )
 
 
