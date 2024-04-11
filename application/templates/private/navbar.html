@@ -40,7 +40,7 @@
             <li><a href="/#faq's-section" class="mobile-nav-link">FAQ's</a></li>
             {% if session.get('user') is none %}
             <li><a href="/team" class="mobile-nav-link">Team</a></li>
-            <li><a href="/authentication/register" class="register mobile-nav-link">Register</a></li>
+            <!-- <li><a href="/authentication/register" class="register mobile-nav-link">Register</a></li> -->
             {% else %}
             <li><a href="/user/events" class="mobile-nav-link">My Events</a></li>
             {% endif %}

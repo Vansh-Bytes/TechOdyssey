@@ -1,6 +1,7 @@
 import os
 import redis
 import time
+import sentry_sdk
 from functools import wraps
 from dotenv import load_dotenv
 from pymongo import MongoClient
@@ -103,6 +104,17 @@ config.github_auth(
     github_auth_initialization_handler_wrapper=is_user_authenticated,
 )
 
+# Sentry initialization
+
+
+sentry_sdk.init(
+    dsn="https://a151e83cec6feb34f0b36bf6d14d0244@o4504045228720128.ingest.us.sentry.io/4507068209102848",
+    enable_tracing=True,
+    traces_sample_rate=1,     
+    profiles_sample_rate=0.2,
+)
+
+
 # Initialize Flask app
 
 app = Flask(__name__)
@@ -178,6 +190,7 @@ def cancelation_policy():
 def auth_register():
     return render_template("auth/authentication.html")
 
+
 @app.route("/authentication/sign-out")
 def auth_sign_out():
     session.pop("user", None)
@@ -186,9 +199,19 @@ def auth_sign_out():
 
 # Error handlers
 
+
 @app.errorhandler(404)
 def page_not_found(error):
-    return render_template("public/error.html", error_code=404, error_message="The requested page was not found.", error_description="The page you are looking for might have been removed, had its name changed, or is temporarily unavailable."), 404
+    return (
+        render_template(
+            "public/error.html",
+            error_code=404,
+            error_message="The requested page was not found.",
+            error_description="The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.",
+        ),
+        404,
+    )
+
 
 if __name__ == "__main__":
     app.run(debug=True)

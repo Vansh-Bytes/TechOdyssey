@@ -3,4 +3,5 @@ redis
 pymongo
 python-dotenv
 Flask-Session
+sentry-sdk[flask]
 flask-social-oauth
