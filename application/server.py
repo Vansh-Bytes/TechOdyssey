@@ -197,6 +197,29 @@ def auth_sign_out():
     return redirect(url_for("index"))
 
 
+# Event routes
+
+@app.route("/events/battle-blitz")
+def event_battle_blitz():
+    return render_template("events/battle-blitz.html")
+
+@app.route("/events/treasure-quest")
+def event_treasure_quest():
+    return render_template("events/treasure-quest.html")
+
+@app.route("/events/code-clash")
+def event_code_clash():
+    return render_template("events/code-clash.html")
+
+@app.route("/events/web-dash")
+def event_web_dash():
+    return render_template("events/web-dash.html")
+
+@app.route("/events/reel-craft")
+def event_reel_craft():
+    return render_template("events/reel-craft.html")
+
+
 # Error handlers
 
 
