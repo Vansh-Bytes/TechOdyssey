@@ -224,6 +224,17 @@ def event_web_dash():
 def event_reel_craft():
     return render_template("events/reel-craft.html")
 
+#Registration routes
+
+@app.route("/register")
+def register():
+    return render_template("public/register.html")
+
+# Registration API routes
+
+@app.route("/api/v1/register", methods=["POST"])
+def api_register():
+    return jsonify({"message": "Registration successful."})
 
 # Error handlers
 

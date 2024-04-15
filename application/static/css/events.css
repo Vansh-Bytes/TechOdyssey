@@ -2,37 +2,54 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     padding: 20px;
     min-height: calc(100vh - 70px);
 }
 
 h1 {
-    font-size: 5rem;
-    margin-bottom: 30px;
+    font-size: 3rem;
     font-weight: 900;
-    text-transform: uppercase;
-    line-height: 7rem;
     color: #FFF;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 100px;
     z-index: 1;
 }
 
 p {
     padding: 20px;
+    font-size: 1.2rem;
 }
 
 .event-description {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
+    gap: 50px;
+    padding: 20px;
+}
+
+.event-description-image {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 20px;
+    height: 100%;
 }
 
 .event-description-image img {
     max-width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100%;
     box-shadow: 3px 3px 1px 0 rgba(52, 115, 108, 0.5);
 }
@@ -51,6 +68,13 @@ p {
     font-size: 2rem;
     font-weight: 900;
     color: #FFF;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    z-index: 1;
 }
 
 .event-description-text ul {
@@ -69,6 +93,7 @@ p {
     justify-content: flex-start;
     align-items: center;
     gap: 10px;
+    font-size: 1.2rem;
 }
 
 

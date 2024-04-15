@@ -27,6 +27,163 @@ body {
 }
 
 
+button {
+    padding: 15px 30px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button.primary-button {
+    background-color: #34736c;
+    color: #fff;
+    transition: 0.3s;
+    box-shadow: 3px 3px 1px 0 rgba(52, 115, 108, 0.5);
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    border: 1px solid #34736c;
+}
+
+button.primary-button:hover {
+    background-color: #000;
+    color: #FFF;
+    box-shadow: 3px 3px 1px 0 rgba(255, 255, 255, 0.5);
+    border: 1px solid #FFF;
+}
+
+button.secondary-button {
+    background-color: #FFF;
+    color: #000;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    border: 1px solid #FFF;
+    box-shadow: 3px 3px 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+button.secondary-button:hover {
+    background-color: #000;
+    color: #FFF;
+    border: 1px solid #FFF;
+}
+
+.faq-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    padding: 100px 20px;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.faq-section h2 {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #FFF;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 100px;
+    z-index: 1;
+}
+
+.faq-section h2 span {
+    padding: 0 20px;
+}
+
+.faq {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.faq-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+    background: #000;
+    border: 1px solid #FFF;
+    transition: 0.3s;
+    width: 100%;
+}
+
+.faq-item h3 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.faq-item h3 svg {
+    width: 30px;
+    height: 30px;
+    fill: #FFF;
+}
+
+.faq-item h3 span {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #FFF;
+    text-transform: uppercase;
+    width: 100%;
+    text-align: left;
+
+}
+
+.faq-item p {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #FFF;
+    text-align: left;
+}
+
+.faq-item p.hidden {
+    display: none;
+    transition: 0.3s;
+}
+
+.call-to-action-faq {
+    margin-top: 50px;
+}
+
+.call-to-action-faq a {
+    text-decoration: none;
+    color: #FFF;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+@media screen and (max-width: 768px) {
+    .faq-section h2 span {
+        font-size: 4rem;
+    }
+
+    .faq-item h3 span {
+        font-size: 1.2rem;
+    }
+
+    .faq-item p {
+        font-size: 1rem;
+    }
+
+
+}
+
 /*  Removing the scrollbar */
 
 ::-webkit-scrollbar {

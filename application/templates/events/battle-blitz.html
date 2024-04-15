@@ -9,13 +9,15 @@
 <div class="event-description">
     <div class="event-description-image">
         <img src="{{ url_for('static', filename='images/battle-blitz.jpeg') }}" alt="Battle Blitz">
+        <button class="primary-button" onclick="window.location.href='/register?event=battle-blitz'"
+            style="width: 100%;">Register
+            Now</button>
     </div>
     <div class="event-description-text">
         <h2>Event Details</h2>
         <ul>
             <li><strong>Date:</strong><span>2nd, May 2024</span></li>
-            <li><strong>Time:</strong><span>To Be Announced</span></li>
-            <li><strong>Location:</strong><span>K.R. Mangalam University</span></li>
+            <li><strong>Time:</strong><span>10:30 AM - 12:30 PM</span></li>
             <li><strong>Registration Fee:</strong><span>₹ 400 / Team</span></li>
             <li><strong>Prize Money:</strong><span>₹ 3,000</span></li>
         </ul>
@@ -30,13 +32,72 @@
             from all over to participate without the hassle of travel. Only the final showdown will take place at the
             event venue, creating an electrifying atmosphere for players and fans alike. It's all about making it
             accessible and exciting for everyone involved!
-            <br>  
-            <br>  
+            <br>
+            <br>
             So mark your calendars and get ready for an eSports experience like no other. Whether you're a player or a
             fan, this extravaganza promises thrills, excitement, and unforgettable moments!
         </p>
     </div>
 </div>
+<div class="faq-section" id="faq's-section">
+    <h2><span>FAQ's</span>
+    </h2>
+    <div class="faq">
+        <div class="faq-item">
+            <h3 onclick="toggleFaq(this)" style="cursor:pointer;"><span>Who is eligible to enter the Battle Blitz
+                    competition?</span><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960"
+                    width="24">
+                    <path d="M480-345 240-585l56-56 184 184 184-184 56 56-240 240Z" />
+                </svg></h3>
+            <p class="hidden">Tech Odyssey is open to all tech enthusiasts, including students (Class 12th and above),
+                professionals, and hobbyists. Participants can register for various events based on their interests and
+                skills.
+            </p>
+        </div>
 
+        <div class="faq-item">
+            <h3 onclick="toggleFaq(this)" style="cursor:pointer;"><span>What happens if someone cheats during the
+                    competition?</span><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960"
+                    width="24">
+                    <path d="M480-345 240-585l56-56 184 184 184-184 56 56-240 240Z" />
+                </svg></h3>
+            <p class="hidden">Any form of cheating will result in immediate disqualification. We uphold fair play and
+                sportsmanship at all times. The decision of the judges will be final and binding.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3 onclick="toggleFaq(this)" style="cursor:pointer;"><span>How are prizes awarded in the Battle Blitz
+                    competition?</span><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960"
+                    width="24">
+                    <path d="M480-345 240-585l56-56 184 184 184-184 56 56-240 240Z" />
+                </svg></h3>
+            <p class="hidden">Prizes will be granted to the top-performing teams or individuals as determined by the
+                judging panel. Additionally, all participants will receive a participation certificate.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3 onclick="toggleFaq(this)" style="cursor:pointer;"><span>What is the expected code of conduct for
+                    participants?</span><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960"
+                    width="24">
+                    <path d="M480-345 240-585l56-56 184 184 184-184 56 56-240 240Z" />
+                </svg></h3>
+            <p class="hidden">Participants are expected to maintain professionalism and respect towards their fellow
+                competitors throughout the competition.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3 onclick="toggleFaq(this)" style="cursor:pointer;"><span>Can I participate in the Battle Blitz competition
+                    alone or do I need to be in a group?</span><svg xmlns="http://www.w3.org/2000/svg" height="24"
+                    viewBox="0 -960 960 960" width="24">
+                    <path d="M480-345 240-585l56-56 184 184 184-184 56 56-240 240Z" />
+                </svg></h3>
+            <p class="hidden">The Battle Blitz competition requires participants to form teams. Each team must consist of
+                a minimum of 4 members and a maximum of 6 members(4 players and 2 substitutes).</p>
+        </div>
+
+    </div>
+    <p class="call-to-action-faq"><a href="mailto:support@techodyssey.dev">Have more questions? Contact us at
+            support@techodyssey.dev for assistance.</a></p>
+</div>
 
 {% endblock %}

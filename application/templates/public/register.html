@@ -1,0 +1,37 @@
+{% extends 'private/base.html' %}
+
+{% block main %}
+
+<link rel="stylesheet" href="{{url_for('static', filename='css/register.css')}}">
+<script src="{{url_for('static', filename='js/register.js')}}"></script>
+
+<h1>Register</h1>
+
+<div class="register-form">
+    <form>
+        <input id="name" name="name" type="text" placeholder="Name">
+        <input id="email" name="email" type="email" placeholder="Email">
+        <select id="event-id" name="event-id">
+            <option value="0">Code Clash</option>
+            <option value="1">Web Dash</option>
+            <option value="2">Treasure Quest</option>
+            <option value="3">Reel Craft</option>
+            <option value="4">Battle Blitz: Valorant</option>
+            <option value="5">Battle Blitz: BGMI</option>
+            <option value="6">Battle Blitz: Free Fire</option>
+        </select>
+        <input id="team-name" name="team-name" type="text" placeholder="Team Name">
+        <textarea id="team_member_emails" name="team_member_emails"
+            placeholder="Enter team members' emails separated by commas"></textarea>
+            <div class="payment">
+                <input id="paymen-screenshot" name="payment-screenshot" type="file" accept=".png,.jpg,.jpeg,.gif">
+                <input id="payment-transaction-id" name="payment-transaction-id" type="text" placeholder="Payment Transaction ID">
+            </div>
+        <checkbox id="tos-checkbox" name="tos-checkbox">I agree to the <a href="{{url_for('terms_of_service')}}">Terms
+                of Service</a></checkbox>
+        <input type="file" id="file" name="file" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg,.gif">
+        <button id="register-button" type="button">Register</button>
+    </form>
+</div>
+
+{% endblock %}
