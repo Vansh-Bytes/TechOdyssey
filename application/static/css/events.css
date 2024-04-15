@@ -17,6 +17,10 @@ h1 {
     z-index: 1;
 }
 
+p {
+    padding: 20px;
+}
+
 .event-description {
     display: flex;
     flex-direction: row;
@@ -65,14 +69,6 @@ h1 {
     justify-content: flex-start;
     align-items: center;
     gap: 10px;
-}
-
-.event-description-text ul li strong {
-    font-size: 1.2rem;
-}
-
-.event-description-text ul li span {
-    font-size: 1.2rem;
 }
 
 
