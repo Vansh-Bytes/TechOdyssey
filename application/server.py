@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 from pymongo import MongoClient
 from flask_session import Session
 from flask_social_oauth import Config, initialize_social_login
-from flask import Flask, render_template, redirect, url_for, session, jsonify, request
+from flask import Flask, render_template, redirect, url_for, session, jsonify, request, send_from_directory
 
 # Helper functions
 
@@ -198,6 +198,9 @@ def after_request(response):
 
 # Basic routes
 
+@app.route("/favicon.ico")
+def favicon():
+    return redirect("https://storage.techodyssey.dev/favicon.ico")
 
 @app.route("/")
 def index():

@@ -11,6 +11,10 @@ main {
     padding: 100px 0px !important;
 }
 
+.faq-item p {
+    padding: 0px !important;
+}
+
 h1 {
     font-size: 3rem;
     font-weight: 900;
