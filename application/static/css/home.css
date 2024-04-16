@@ -273,6 +273,10 @@ main {
         margin-top: 50px;
     }
 
+    .registration-more-info{
+        display: none;
+    }
+
     .hero-buttons {
         flex-direction: column;
         gap: 20px;

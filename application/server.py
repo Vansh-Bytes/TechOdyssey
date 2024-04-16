@@ -1,13 +1,15 @@
 import os
+import uuid
 import redis
 import time
+import requests
 import sentry_sdk
 from functools import wraps
 from dotenv import load_dotenv
 from pymongo import MongoClient
 from flask_session import Session
 from flask_social_oauth import Config, initialize_social_login
-from flask import Flask, render_template, redirect, url_for, session, jsonify
+from flask import Flask, render_template, redirect, url_for, session, jsonify, request
 
 # Helper functions
 
@@ -70,6 +72,40 @@ def generate_user_session(user, provider):
     }
 
 
+def is_session_valid(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        if "user" in session:
+            return func(*args, **kwargs)
+        else:
+            session["next"] = request.url
+            return redirect(url_for("auth_register"))
+
+    return wrapper
+
+
+def image_uploader(image):
+    try:
+
+        response = requests.post(
+            "https://api.imgbb.com/1/upload",
+            files={"image": image},
+            data={
+                "key": "34ac0186cc7075a3a6cf707006ecfef9",
+                "name": f"{uuid.uuid4()}",
+            },
+            timeout=10,
+        )
+
+        if response.status_code != 200:
+            return None
+
+        return response.json()["data"]["url"]
+
+    except TimeoutError:
+        return None
+
+
 # Load environment variables
 load_dotenv()
 
@@ -83,7 +119,7 @@ mongodb_cursor = mongdb_connection["prod"]
 # Initialize Social OAuth configuration
 config = Config(
     social_auth_providers=["google", "github"],
-    application_root_url="https://techodyssey.dev",
+    application_root_url="http://127.0.0.1:5000",
 )
 
 config.google_auth(
@@ -155,6 +191,20 @@ def before_request():
                 session["user"] = generate_user_session(session["user"], "github")
 
 
+@app.after_request
+def after_request(response):
+    response.headers["Server"] = "TechOdyssey"
+    if (
+        request.path == "/api/v1/authentication/handler/google"
+        or request.path == "/api/v1/authentication/handler/github"
+    ):
+        print("Redirecting to next page")
+        if session.get("next") is not None:
+            response = redirect(session["next"])
+            session.pop("next", None)
+    return response
+
+
 # Basic routes
 
 
@@ -224,17 +274,219 @@ def event_web_dash():
 def event_reel_craft():
     return render_template("events/reel-craft.html")
 
-#Registration routes
+
+# Registration routes
+
 
 @app.route("/register")
+@is_session_valid
 def register():
     return render_template("public/register.html")
 
+
 # Registration API routes
 
+
 @app.route("/api/v1/register", methods=["POST"])
+@is_session_valid
 def api_register():
-    return jsonify({"message": "Registration successful."})
+    event_reference = {
+        "0": "Code Clash",
+        "1": "Web Dash",
+        "2": "Treasure Quest",
+        "3": "Reel Craft",
+        "4": "Battle Blitz: Valorant",
+        "5": "Battle Blitz: BGMI Mobile",
+        "6": "Battle Blitz: Free Fire",
+    }
+
+    form_data = request.form
+    event_id = form_data.get("event")
+
+    if event_id is None:
+        return jsonify(
+            {"status": "error", "message": "Please select an event to register."}
+        )
+
+    event_name = event_reference.get(event_id)
+
+    if event_id in ["4", "5", "6"]:
+        team_name = form_data.get("teamName")
+
+        team_members = []
+
+        for member in form_data.get("teamMembers").split(","):
+            team_members.append(
+                member.strip().lower().replace(" ", "").replace(",", "")
+            )
+
+        if len(team_members) == 0:
+            return jsonify(
+                {
+                    "status": "error",
+                    "message": "Please provide team members' email addresses, separated by commas.",
+                }
+            )
+
+        if team_name is None:
+            return jsonify(
+                {"status": "error", "message": "Please provide a team name."}
+            )
+
+        for i in range(len(team_members)):
+            if (
+                team_members[i] == ","
+                or team_members[i] == " "
+                or team_members[i] == ""
+            ):
+                team_members = team_members[:i] + team_members[i + 1 :]
+
+        if event_id == "4" and len(team_members) != 5:
+            return jsonify(
+                {
+                    "status": "error",
+                    "message": "To participate in Battle Blitz: Valorant, you need to have 5 members in your team.",
+                }
+            )
+
+        if event_id in ["5", "6"] and len(team_members) != 4:
+            return jsonify(
+                {
+                    "status": "error",
+                    "message": "To participate in Battle Blitz: BGMI Mobile or Battle Blitz: Free Fire, you need to have 4 members in your team.",
+                }
+            )
+
+        if session["user"]["email"].lower() not in team_members:
+            return jsonify(
+                {
+                    "status": "error",
+                    "message": "You need to be part of the team to register for the event. Please provide your email address in the team members list.",
+                }
+            )
+
+        for member in team_members:
+            if member.find("@") == -1:
+                return jsonify(
+                    {
+                        "status": "error",
+                        "message": "Please provide valid email addresses for all team members.",
+                    }
+                )
+
+        if len(team_members) != len(set(team_members)):
+            return jsonify(
+                {
+                    "status": "error",
+                    "message": "Please provide unique email addresses for all team members.",
+                }
+            )
+
+    if request.files.get("paymentScreenshot") is None:
+        return jsonify(
+            {"status": "error", "message": "Please provide the payment screenshot."}
+        )
+
+    payment_transaction_id = form_data.get("paymentTransactionId")
+    if payment_transaction_id is None:
+        return jsonify(
+            {"status": "error", "message": "Please provide the payment transaction ID."}
+        )
+
+    payment_screenshot_url = image_uploader(request.files.get("paymentScreenshot"))
+    if payment_screenshot_url is None:
+        return jsonify(
+            {
+                "status": "error",
+                "message": "An error occurred while uploading the payment screenshot. Please try again.",
+            }
+        )
+
+    try:
+        registrations = mongodb_cursor["registrations"]
+
+        if event_id in ["4", "5", "6"]:
+            existing_team = registrations.find_one(
+                {
+                    "event": event_name,
+                    "teamName": form_data.get("teamName").strip().title(),
+                }
+            )
+            if existing_team:
+                return jsonify(
+                    {
+                        "status": "error",
+                        "message": f"The team name `{form_data.get('teamName').strip().title()}` has already been registered for this event. Please provide a different team name.",
+                    }
+                )
+
+            existing_member = registrations.find_one(
+                {
+                    "event": event_name,
+                    "teamMembers": {"$in": form_data.get("teamMembers").split(",")},
+                }
+            )
+            if existing_member:
+                for member in existing_member["teamMembers"]:
+                    for team_member in team_members:
+                        if member == team_member:
+                            return jsonify(
+                                {
+                                    "status": "error",
+                                    "message": f"The email address `{member}` has already been registered for this event. Please provide a different email address.",
+                                }
+                            )
+
+            registrations.insert_one(
+                {
+                    "event": event_name,
+                    "name": form_data.get("name").strip().title(),
+                    "email": form_data.get("email").strip().lower(),
+                    "teamName": form_data.get("teamName").strip().title(),
+                    "teamMembers": team_members,
+                    "paymentScreenshot": payment_screenshot_url,
+                    "paymentTransactionId": payment_transaction_id,
+                    "status": "pending",
+                }
+            )
+
+        else:
+            if registrations.find_one(
+                {"event": event_name, "email": form_data.get("email").strip().lower()}
+            ):
+                return jsonify(
+                    {
+                        "status": "error",
+                        "message": "You have already registered for this event. You can view your registration status in the `My Events` section.",
+                    }
+                )
+
+            registrations.insert_one(
+                {
+                    "event": event_name,
+                    "name": form_data.get("name").strip().title(),
+                    "email": form_data.get("email").strip().lower(),
+                    "paymentScreenshot": payment_screenshot_url,
+                    "paymentTransactionId": payment_transaction_id,
+                    "status": "pending",
+                }
+            )
+
+        return jsonify(
+            {
+                "status": "success",
+                "message": "Registration successful. Please wait while our team verifies your payment.",
+            }
+        )
+
+    except Exception as e:
+        return jsonify(
+            {
+                "status": "error",
+                "message": "An error occurred while registering. Please try again.",
+            }
+        )
+
 
 # Error handlers
 

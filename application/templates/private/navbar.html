@@ -10,7 +10,7 @@
         <li><a href="/#events-section">Events</a></li>
         {% if session.get('user') is none %}
         <li><a href="/#faq's-section">FAQ's</a></li>
-        <!-- <li><a href="/authentication/register" class="register">Register</a></li> -->
+        <li><a href="/register" class="register">Register</a></li>
         {% else %}
         <li><a href="/user/events">My Events</a></li>
         <li>
@@ -39,7 +39,7 @@
             <li><a href="/#events-section" class="mobile-nav-link">Events</a></li>
             <li><a href="/#faq's-section" class="mobile-nav-link">FAQ's</a></li>
             {% if session.get('user') is none %}
-            <!-- <li><a href="/authentication/register" class="register mobile-nav-link">Register</a></li> -->
+            <li><a href="/register" class="register mobile-nav-link">Register</a></li>
             {% else %}
             <li><a href="/user/events" class="mobile-nav-link">My Events</a></li>
             {% endif %}
