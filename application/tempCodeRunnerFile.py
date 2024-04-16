@@ -1,1 +1,0 @@
-events/battle-blitz.html

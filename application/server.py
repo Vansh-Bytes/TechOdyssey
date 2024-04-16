@@ -224,6 +224,8 @@ def cancelation_policy():
     return render_template("public/cancellation-policy.html")
 
 
+# User routes	
+
 @app.route("/user/events")
 @is_session_valid
 def user_my_events():
@@ -234,7 +236,6 @@ def user_my_events():
 
 
 # Auth routes
-
 
 @app.route("/authentication/register")
 def auth_register():
@@ -248,7 +249,6 @@ def auth_sign_out():
 
 
 # Event routes
-
 
 @app.route("/events/battle-blitz")
 def event_battle_blitz():
@@ -478,6 +478,11 @@ def api_register():
             }
         )
 
+# Site map routes
+    
+@app.route("/sitemap.xml")
+def sitemap():
+    return render_template("public/sitemap.xml"), 200, {"Content-Type": "application/xml"}
 
 # Error handlers
 
