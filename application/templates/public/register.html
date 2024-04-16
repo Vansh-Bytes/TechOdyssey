@@ -11,7 +11,7 @@
     <form>
         <input id="name" name="name" type="text" placeholder="Name" value="{{session.user.name | title}}" disabled>
         <input id="email" name="email" type="email" placeholder="Email" value="{{session.user.email | lower}}" disabled>
-        <input id="phone" name="phone" type="tel" placeholder="Phone Number">
+        <input id="phone" name="phone" type="tel" placeholder="Phone Number" required>
         <select id="event-id" name="event-id" required onchange="updateRegistration()">
             <option value="" disabled selected>Select Event</option>
             <option value="0">Code Clash</option>
@@ -44,7 +44,8 @@
         </div>
         <div class="payment-screenshot" onclick="document.getElementById('payment-screenshot').click()"
             style="cursor: pointer;">
-            <input id="payment-screenshot" name="payment-screenshot" type="file" accept=".png,.jpg,.jpeg,.gif">
+            <input id="payment-screenshot" name="payment-screenshot" type="file" accept=".png,.jpg,.jpeg,.gif" required
+                style="display: none;">
             <div class="payment-screenshot-upload">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
                     <path
@@ -54,7 +55,7 @@
             </div>
         </div>
         <input id="payment-transaction-id" name="payment-transaction-id" type="text"
-            placeholder="Payment Transaction ID">
+            placeholder="Payment Transaction ID" required>
         <button class="primary-button" type="button" onclick="register()" id="register-button">Register</button>
     </form>
 </div>

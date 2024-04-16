@@ -7,6 +7,10 @@ main {
     min-height: calc(100vh - 70px);
 }
 
+.faq-section {
+    padding: 100px 0px !important;
+}
+
 h1 {
     font-size: 3rem;
     font-weight: 900;
@@ -101,29 +105,38 @@ p {
 
 
 @media (max-width: 768px) {
-    h1 {
-        font-size: 3rem;
-        line-height: 4rem;
-    }
 
-    .event-description {
-        flex-direction: column;
-        gap: 20px;
-    }
+    @media screen and (max-width: 768px) {
 
-    .event-description-image img {
-        max-width: 100%;
-    }
+        * {
+            box-sizing: border-box;
+            font-size: 12px;
+        }
 
-    .event-description-text h2 {
-        font-size: 1.5rem;
-    }
+        h1 {
+            font-size: 3rem;
+            line-height: 4rem;
+        }
 
-    .event-description-text ul li strong {
-        font-size: 1rem;
-    }
+        .event-description {
+            flex-direction: column;
+            gap: 20px;
+        }
 
-    .event-description-text ul li span {
-        font-size: 1rem;
+        .event-description-image img {
+            max-width: 100%;
+        }
+
+        .event-description-text h2 {
+            font-size: 1.5rem;
+        }
+
+        .event-description-text ul li strong {
+            font-size: 1rem;
+        }
+
+        .event-description-text ul li span {
+            font-size: 1rem;
+        }
     }
 }

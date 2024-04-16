@@ -77,6 +77,11 @@ function register() {
         return;
     }
 
+    if (!phone.match(/^\d{10}$/)) {
+        alert("Please enter a valid 10-digit phone number");
+        return;
+    }
+
     const formData = new FormData();
     formData.append("name", name);
     formData.append("email", email);
