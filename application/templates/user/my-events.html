@@ -14,21 +14,30 @@
 <div class="events">
     {% for event in user_events %}
     <div class="event">
+        <h2>{{event.event}} Ticket</h2>
+        <br>
         <div class="event-details">
-            <p>Registration ID - {{event._id}}</p>
-            <p>Event Name - {{event.event}}</p>
-            <p>Name - {{event.name}}</p>
-            <p>Email - {{event.email}}</p>
+            <p><span>Registration ID -</span> {{event._id}}</p>
+            <p><span>Student Name -</span> {{event.name}}</p>
+            <p><span>Student Email -</span> {{event.email}}</p>
             {% if event.get('teamName') %}
-            <p>Team Name - {{event.teamName}}</p>
-            <p>Team Members - {{event.teamMembers}}</p>
+            <p><span>Team Name -</span> {{event.teamName}}</p>
+            <p><span>Team Members -</span> {% for member in event.teamMembers %}{{member}}{% if not loop.last %},
+                {% endif %}{% endfor %}</p>
             {% endif %}
-            <p>Payment Screenshot - <a href="{{event.paymentScreenshot}}" target="_blank">View</a></p>
-            <p>Payment Transaction ID - {{event.paymentTransactionId}}</p>
-            <p>Status - {{event.status | title}}</p>
+            <p><span>Payment Screenshot -</span> <a href="{{event.paymentScreenshot}}" target="_blank">View</a></p>
+            <p><span>Payment Transaction ID -</span> {{event.paymentTransactionId}}</p>
+            <p><span>Status -</span> {% if event.status == 'pending' %}The ticket is awaiting approval from the
+                TechOdyssey
+                team. You will receive an email once the ticket is approved.
+                {% elif event.status == 'approved' %}The ticket has been approved, and you are all set to participate in the event.
+                {% elif event.status == 'rejected' %}The ticket has been rejected. Please contact the TechOdyssey team
+                for
+                further details.
+                {% endif %}
         </div>
-        {% endfor %}
     </div>
+    {% endfor %}
     {% endif %}
 
     {% endblock %}

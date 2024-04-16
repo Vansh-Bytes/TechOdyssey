@@ -2,7 +2,60 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     min-height: 100vh;
     padding: 20px;
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #FFF;
+    z-index: 1;
+}
+
+.events {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 20px;
+}
+
+.event {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 20px;
+    border: 1px solid #FFF;
+    margin: 10px 0;
+    background-color: #000;
+}
+
+.event-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 5px;
+}
+
+.event span {
+    font-size: 1rem;
+    color: #FFF;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-right: 5px;
+
+}
+
+.event p {
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: #FFF;
 }

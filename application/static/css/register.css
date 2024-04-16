@@ -140,3 +140,8 @@ button.primary-button {
     margin-left: auto;
     margin-bottom: 100px;
 }
+
+#registration_amount {
+    font-size: 1.2rem;
+    font-weight: 700;
+}

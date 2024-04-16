@@ -26,10 +26,11 @@ nav .logo img {
 }
 
 .krmu-logo {
-    width: 50px;
+    width: 220px !important;
     height: 50px;
-    background-color: transparent !important;
-    border-radius: 0% !important;
+    background-color: #FFF !important;
+    border-radius: 10px !important;  
+    padding: 5px !important;  
 }
 
 
@@ -180,6 +181,10 @@ nav ul li a:hover {
         height: auto;
         background-color: #fff;
         border-radius: 50%;
+    }
+
+    .krmu-logo {
+        display: none;
     }
 
     nav ul {
