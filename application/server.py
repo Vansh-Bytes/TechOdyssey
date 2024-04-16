@@ -119,7 +119,7 @@ mongodb_cursor = mongdb_connection["prod"]
 # Initialize Social OAuth configuration
 config = Config(
     social_auth_providers=["google", "github"],
-    application_root_url="http://127.0.0.1:5000",
+    application_root_url="https://techodyssey.dev",
 )
 
 config.google_auth(
