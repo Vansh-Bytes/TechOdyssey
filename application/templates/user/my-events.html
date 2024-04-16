@@ -1,0 +1,34 @@
+{% extends 'private/base.html' %}
+
+{% block main %}
+
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/my-events.css')}}">
+
+<h1>My Events</h1>
+
+{% if user_events == None or user_events == [] %}
+<p>You have not registered for any events.</p>
+<button class="primary-button" onclick="window.location.href='/register'">Register Now</button>
+<button class="secondary-button" onclick="window.location.href='/#events-section'">Explore Events</button>
+{% else %}
+<div class="events">
+    {% for event in user_events %}
+    <div class="event">
+        <div class="event-details">
+            <p>Registration ID - {{event._id}}</p>
+            <p>Event Name - {{event.event}}</p>
+            <p>Name - {{event.name}}</p>
+            <p>Email - {{event.email}}</p>
+            {% if event.get('teamName') %}
+            <p>Team Name - {{event.teamName}}</p>
+            <p>Team Members - {{event.teamMembers}}</p>
+            {% endif %}
+            <p>Payment Screenshot - <a href="{{event.paymentScreenshot}}" target="_blank">View</a></p>
+            <p>Payment Transaction ID - {{event.paymentTransactionId}}</p>
+            <p>Status - {{event.status | title}}</p>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% endblock %}

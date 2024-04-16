@@ -15,16 +15,39 @@ function updateRegistration() {
 
     const teamDetails = document.getElementById("team-details");
     teamDetails.style.display = selectedEvent === "4" || selectedEvent === "5" || selectedEvent === "6" ? "flex" : "none";
+
+    if (selectedEvent === "4") {
+        document.getElementById("team-member-5-name").style.display = "block";
+    }
+
+    
 }
 
 function register() {
     const name = document.getElementById("name").value.trim();
     const email = document.getElementById("email").value.trim();
+    const phone = document.getElementById("phone").value.trim();
     const event = document.getElementById("event-id").value;
     const teamName = document.getElementById("team-name").value.trim();
-    const teamMembers = document.getElementById("team_member_emails").value.trim();
+    const teamMembers = [];
     const paymentScreenshot = document.getElementById("payment-screenshot").files[0];
     const paymentTransactionId = document.getElementById("payment-transaction-id").value.trim();
+
+
+    if (event === "4") {
+        teamMembers.push(document.getElementById("team-member-1-name").value.trim());
+        teamMembers.push(document.getElementById("team-member-2-name").value.trim());
+        teamMembers.push(document.getElementById("team-member-3-name").value.trim());
+        teamMembers.push(document.getElementById("team-member-4-name").value.trim());
+        teamMembers.push(document.getElementById("team-member-5-name").value.trim());
+    }
+
+    if (event === "5" || event === "6") {
+        teamMembers.push(document.getElementById("team-member-1-name").value.trim());
+        teamMembers.push(document.getElementById("team-member-2-name").value.trim());
+        teamMembers.push(document.getElementById("team-member-3-name").value.trim());
+        teamMembers.push(document.getElementById("team-member-4-name").value.trim());
+    }
 
     if (!name || !email || !event) {
         alert("Please fill in the required fields: Name, Email, Event");
@@ -36,7 +59,7 @@ function register() {
         return;
     }
 
-    if (["4", "5", "6"].includes(event) && teamMembers.split(",").length !== (event === "4" ? 5 : 4)) {
+    if (["4", "5", "6"].includes(event) && teamMembers.length !== (event === "4" ? 5 : 4)) {
         alert(`To participate in ${event === "4" ? "Battle Blitz: Valorant" : "Battle Blitz: PUBG Mobile or Battle Blitz: Free Fire"}, you need to have ${event === "4" ? 5 : 4} members in your team`);
         return;
     }
@@ -54,6 +77,7 @@ function register() {
     const formData = new FormData();
     formData.append("name", name);
     formData.append("email", email);
+    formData.append("phone", phone);
     formData.append("event", event);
     formData.append("teamName", teamName);
     formData.append("teamMembers", teamMembers);
@@ -68,21 +92,21 @@ function register() {
         method: "POST",
         body: formData,
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === "success") {
-            window.location.href = "/user/events";
-        } else {
-            alert(data.message);
-        }
-    })
-    .catch(() => {
-        alert("Oops! Something went wrong. Please try again later");
-    })
-    .finally(() => {
-        registerButton.disabled = false;
-        registerButton.innerHTML = "Register";
-    });
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "success") {
+                window.location.href = "/user/events";
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(() => {
+            alert("Oops! Something went wrong. Please try again later");
+        })
+        .finally(() => {
+            registerButton.disabled = false;
+            registerButton.innerHTML = "Register";
+        });
 }
 
 document.addEventListener("DOMContentLoaded", function () {

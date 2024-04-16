@@ -11,6 +11,7 @@
     <form>
         <input id="name" name="name" type="text" placeholder="Name" value="{{session.user.name | title}}" disabled>
         <input id="email" name="email" type="email" placeholder="Email" value="{{session.user.email | lower}}" disabled>
+        <input id="phone" name="phone" type="tel" placeholder="Phone Number">
         <select id="event-id" name="event-id" required onchange="updateRegistration()">
             <option value="" disabled selected>Select Event</option>
             <option value="0">Code Clash</option>
@@ -21,10 +22,15 @@
             <option value="5">Battle Blitz: BGMI</option>
             <option value="6">Battle Blitz: Free Fire</option>
         </select>
+        <br>
         <div id="team-details" class="team-details" style="width: 100%;gap: 20px;display: none;flex-direction: column;">
             <input id="team-name" name="team-name" type="text" placeholder="Team Name">
-            <input id="team_member_emails" name="team_member_emails"
-                placeholder="Enter team members' emails separated by commas" type="text" value="{{session.user.email | lower}}, ">
+            <input id="team-member-1-name" name="team-member-1-name" type="text" placeholder="Team Member 1 Name"
+                required value="{{session.user.name | title}}" disabled>
+            <input id="team-member-2-name" name="team-member-2-name" type="text" placeholder="Team Member 2 Name">
+            <input id="team-member-3-name" name="team-member-3-name" type="text" placeholder="Team Member 3 Name">
+            <input id="team-member-4-name" name="team-member-4-name" type="text" placeholder="Team Member 4 Name">
+            <input id="team-member-5-name" name="team-member-5-name" type="text" placeholder="Team Member 5 Name" style="display: none;">
         </div>
         <p class="payment-info"><a href="https://securegw.paytm.in/link/paymentForm/13143/LL_689542600"
                 target="_blank">Click here</a> or scan the QR code below to pay the registration fee of ₹<span
@@ -34,7 +40,8 @@
         <div class="payment-qr">
             <img src="https://storage.techodyssey.dev/patym-qr-code.svg" alt="Paytm QR Code">
         </div>
-        <div class="payment-screenshot" onclick="document.getElementById('payment-screenshot').click()" style="cursor: pointer;">
+        <div class="payment-screenshot" onclick="document.getElementById('payment-screenshot').click()"
+            style="cursor: pointer;">
             <input id="payment-screenshot" name="payment-screenshot" type="file" accept=".png,.jpg,.jpeg,.gif">
             <div class="payment-screenshot-upload">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">

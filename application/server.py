@@ -118,8 +118,8 @@ mongodb_cursor = mongdb_connection["prod"]
 
 # Initialize Social OAuth configuration
 config = Config(
-    social_auth_providers=["google", "github"],
-    application_root_url="https://techodyssey.dev",
+    social_auth_providers=["google"],
+    application_root_url="http://127.0.0.1:5000",
 )
 
 config.google_auth(
@@ -129,15 +129,6 @@ config.google_auth(
     google_auth_initialization_handler_uri="/authentication/initialize/google",
     google_auth_callback_handler_uri="/api/v1/authentication/handler/google",
     google_auth_initialization_handler_wrapper=is_user_authenticated,
-)
-
-config.github_auth(
-    github_auth_client_id=os.getenv("GITHUB_CLIENT_ID"),
-    github_auth_client_secret=os.getenv("GITHUB_CLIENT_SECRET"),
-    github_auth_scope="user",
-    github_auth_initialization_handler_uri="/authentication/initialize/github",
-    github_auth_callback_handler_uri="/api/v1/authentication/handler/github",
-    github_auth_initialization_handler_wrapper=is_user_authenticated,
 )
 
 # Sentry initialization
@@ -233,6 +224,15 @@ def cancelation_policy():
     return render_template("public/cancellation-policy.html")
 
 
+@app.route("/user/events")
+@is_session_valid
+def user_my_events():
+    user_events = mongodb_cursor["registrations"].find(
+        {"email": session["user"]["email"]}
+    )
+    return render_template("user/my-events.html", user_events=user_events)
+
+
 # Auth routes
 
 
@@ -313,18 +313,18 @@ def api_register():
     if event_id in ["4", "5", "6"]:
         team_name = form_data.get("teamName")
 
-        team_members = []
+        team_members = form_data.get("teamMembers").split(",")
 
-        for member in form_data.get("teamMembers").split(","):
-            team_members.append(
-                member.strip().lower().replace(" ", "").replace(",", "")
-            )
+        for index, member in enumerate(team_members):
+            team_members[index] = member.strip().title()
+            if team_members[index] == "" or team_members[index] == " ":
+                team_members.pop(index)
 
         if len(team_members) == 0:
             return jsonify(
                 {
                     "status": "error",
-                    "message": "Please provide team members' email addresses, separated by commas.",
+                    "message": "Please provide the names of all team members.",
                 }
             )
 
@@ -332,14 +332,6 @@ def api_register():
             return jsonify(
                 {"status": "error", "message": "Please provide a team name."}
             )
-
-        for i in range(len(team_members)):
-            if (
-                team_members[i] == ","
-                or team_members[i] == " "
-                or team_members[i] == ""
-            ):
-                team_members = team_members[:i] + team_members[i + 1 :]
 
         if event_id == "4" and len(team_members) != 5:
             return jsonify(
@@ -357,30 +349,31 @@ def api_register():
                 }
             )
 
-        if session["user"]["email"].lower() not in team_members:
+        if session["user"]["name"].strip().title() not in team_members:
             return jsonify(
                 {
                     "status": "error",
-                    "message": "You need to be part of the team to register for the event. Please provide your email address in the team members list.",
+                    "message": "You need to be part of the team to register for the event. Please provide your name in the team members list.",
                 }
             )
 
-        for member in team_members:
-            if member.find("@") == -1:
-                return jsonify(
-                    {
-                        "status": "error",
-                        "message": "Please provide valid email addresses for all team members.",
-                    }
-                )
+    if form_data.get("phone") is None:
+        return jsonify(
+            {"status": "error", "message": "Please provide your phone number."}
+        )
 
-        if len(team_members) != len(set(team_members)):
-            return jsonify(
-                {
-                    "status": "error",
-                    "message": "Please provide unique email addresses for all team members.",
-                }
-            )
+    if form_data.get("phone").strip() == "":
+        return jsonify(
+            {"status": "error", "message": "Please provide a valid phone number."}
+        )
+
+    if len(form_data.get("phone").strip()) != 10:
+        return jsonify(
+            {
+                "status": "error",
+                "message": "Please provide a valid 10-digit phone number.",
+            }
+        )
 
     if request.files.get("paymentScreenshot") is None:
         return jsonify(
@@ -420,28 +413,25 @@ def api_register():
                     }
                 )
 
-            existing_member = registrations.find_one(
+            if registrations.find_one(
                 {
                     "event": event_name,
-                    "teamMembers": {"$in": form_data.get("teamMembers").split(",")},
+                    "email": session["user"]["email"],
                 }
-            )
-            if existing_member:
-                for member in existing_member["teamMembers"]:
-                    for team_member in team_members:
-                        if member == team_member:
-                            return jsonify(
-                                {
-                                    "status": "error",
-                                    "message": f"The email address `{member}` has already been registered for this event. Please provide a different email address.",
-                                }
-                            )
+            ):
+                return jsonify(
+                    {
+                        "status": "error",
+                        "message": "You have already registered for this event. You can view your registration status in the `My Events` section.",
+                    }
+                )
 
             registrations.insert_one(
                 {
                     "event": event_name,
                     "name": form_data.get("name").strip().title(),
                     "email": form_data.get("email").strip().lower(),
+                    "phone": form_data.get("phone"),
                     "teamName": form_data.get("teamName").strip().title(),
                     "teamMembers": team_members,
                     "paymentScreenshot": payment_screenshot_url,
@@ -466,6 +456,7 @@ def api_register():
                     "event": event_name,
                     "name": form_data.get("name").strip().title(),
                     "email": form_data.get("email").strip().lower(),
+                    "phone": form_data.get("phone"),
                     "paymentScreenshot": payment_screenshot_url,
                     "paymentTransactionId": payment_transaction_id,
                     "status": "pending",
