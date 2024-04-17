@@ -178,13 +178,18 @@ nav ul li a:hover {
 
     nav .logo img {
         width: 40px;
+        height: 40px;
         height: auto;
         background-color: #fff;
         border-radius: 50%;
     }
 
     .krmu-logo {
-        display: none;
+        width: 180px !important;
+        height: 40px;
+        background-color: #FFF !important;
+        border-radius: 10px !important;  
+        padding: 5px !important;
     }
 
     nav ul {
