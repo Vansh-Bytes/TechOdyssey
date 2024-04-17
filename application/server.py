@@ -9,7 +9,16 @@ from dotenv import load_dotenv
 from pymongo import MongoClient
 from flask_session import Session
 from flask_social_oauth import Config, initialize_social_login
-from flask import Flask, render_template, redirect, url_for, session, jsonify, request, send_from_directory
+from flask import (
+    Flask,
+    render_template,
+    redirect,
+    url_for,
+    session,
+    jsonify,
+    request,
+    abort,
+)
 
 # Helper functions
 
@@ -198,9 +207,11 @@ def after_request(response):
 
 # Basic routes
 
+
 @app.route("/favicon.ico")
 def favicon():
     return redirect("https://storage.techodyssey.dev/favicon.ico")
+
 
 @app.route("/")
 def index():
@@ -227,7 +238,8 @@ def cancelation_policy():
     return render_template("public/cancellation-policy.html")
 
 
-# User routes	
+# User routes
+
 
 @app.route("/user/events")
 @is_session_valid
@@ -239,6 +251,7 @@ def user_my_events():
 
 
 # Auth routes
+
 
 @app.route("/authentication/register")
 def auth_register():
@@ -252,6 +265,7 @@ def auth_sign_out():
 
 
 # Event routes
+
 
 @app.route("/events/battle-blitz")
 def event_battle_blitz():
@@ -481,11 +495,39 @@ def api_register():
             }
         )
 
+
 # Site map routes
-    
+
+
 @app.route("/sitemap.xml")
 def sitemap():
-    return render_template("public/sitemap.xml"), 200, {"Content-Type": "application/xml"}
+    return (
+        render_template("public/sitemap.xml"),
+        200,
+        {"Content-Type": "application/xml"},
+    )
+
+
+# Admin Routes
+
+
+@app.route("/stats")
+@is_session_valid
+def stats():
+    if session["user"]["email"] != "om.2472004@gmail.com":
+        return abort(404)
+    number_of_application_users = mongodb_cursor["users"].count_documents({})
+    application_users = mongodb_cursor["users"].find({})
+    number_of_registarations = mongodb_cursor["registrations"].count_documents({})
+    event_registrations = mongodb_cursor["registrations"].find({})
+    return render_template(
+        "admin/stats.html",
+        number_of_application_users=number_of_application_users,
+        number_of_registarations=number_of_registarations,
+        application_users=application_users,
+        event_registrations=event_registrations,
+    )
+
 
 # Error handlers
 
