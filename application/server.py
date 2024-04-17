@@ -2,6 +2,7 @@ import os
 import uuid
 import redis
 import time
+from datetime import timedelta
 import requests
 import sentry_sdk
 from functools import wraps
@@ -174,11 +175,13 @@ app.config["SESSION_COOKIE_SECURE"] = True
 app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
 app.config["SESSION_COOKIE_PATH"] = "/"
 app.config["SESSION_COOKIE_DOMAIN"] = ".techodyssey.dev"
-app.config["SESSION_COOKIE_MAX_AGE"] = 15780000
-app.config["PERMANENT_SESSION_LIFETIME"] = 15780000
+
+# Set session lifetime to 6 months (in seconds)
+six_months_in_seconds = 6 * 30 * 24 * 60 * 60
+app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(seconds=six_months_in_seconds)
+
+# Optionally refresh the session each request
 app.config["SESSION_REFRESH_EACH_REQUEST"] = True
-
-
 
 
 # Flask OAuth initialization
