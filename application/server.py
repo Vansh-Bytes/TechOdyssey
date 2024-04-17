@@ -268,7 +268,7 @@ def auth_register():
 
 @app.route("/authentication/sign-out")
 def auth_sign_out():
-    session.pop("user", None)
+    session.clear()
     return redirect(url_for("index"))
 
 
