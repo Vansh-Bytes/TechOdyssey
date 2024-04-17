@@ -13,12 +13,13 @@ function updateRegistration() {
     const amount = selectedEvent ? amountReference[selectedEvent] : 0;
     document.getElementById("registration_amount").innerHTML = amount;
 
+    document.getElementById("payment-info-container").style.display = "flex !important";
+
     const teamDetails = document.getElementById("team-details");
     teamDetails.style.display = selectedEvent === "4" || selectedEvent === "5" || selectedEvent === "6" ? "flex" : "none";
 
     if (selectedEvent === "4") {
         document.getElementById("team-member-5-name").style.display = "block";
-        document.getElementById("payment-info-container").style.display = "flex !important";
     }
     else {
         document.getElementById("team-member-5-name").style.display = "none";
