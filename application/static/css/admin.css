@@ -1,0 +1,112 @@
+main {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-top: 50px;
+    padding: 20px;
+}
+
+main h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 900;
+    width: 100%;
+}
+
+main h3 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: left;
+    text-transform: uppercase;
+    font-weight: 900;
+    width: 100%;
+
+}
+
+main p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    width: 100%;
+    text-transform: uppercase;
+}
+
+.user-stats-container {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+}
+
+.user-stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    background-color: #000;
+    padding: 20px;
+    gap: 20px;
+    border-radius: 10px;
+}
+
+.user-image img {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.user-info p {
+    margin: 0px !important;
+    font-size: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+    main {
+        padding: 10px;
+    }
+
+    main h1 {
+        font-size: 2rem;
+    }
+
+    main h3 {
+        font-size: 1.5rem;
+    }
+
+    main p {
+        font-size: 1rem;
+    }
+
+    .user-stats-container {
+        gap: 10px;
+    }
+
+    .user-stats {
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .user-image img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .user-info p {
+        font-size: 0.8rem;
+    }
+}
