@@ -18,7 +18,7 @@ function updateRegistration() {
 
     if (selectedEvent === "4") {
         document.getElementById("team-member-5-name").style.display = "block";
-        document.getElementById("payment-info-container").style.display = "flex";
+        document.getElementById("payment-info-container").style.display = "flex !important";
     }
     else {
         document.getElementById("team-member-5-name").style.display = "none";
