@@ -193,10 +193,7 @@ initialize_social_login(session, app, config)
 def before_request():
     if session.get("user") is not None:
         if session["user"].get("provider") is None:
-            if session["user"].get("verified_email") is not None:
                 session["user"] = generate_user_session(session["user"], "google")
-            else:
-                session["user"] = generate_user_session(session["user"], "github")
 
 
 @app.after_request
