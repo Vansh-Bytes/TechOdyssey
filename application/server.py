@@ -165,13 +165,18 @@ app.config["SESSION_TYPE"] = "redis"
 app.config["SESSION_REDIS"] = redis.from_url(
     os.getenv("REDIS_URI"),
 )
-app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_PERMANENT"] = True
 app.config["SESSION_USE_SIGNER"] = True
 app.config["SESSION_KEY_PREFIX"] = "techodyssey-"
 app.config["SESSION_COOKIE_NAME"] = "techodyssey-session"
 app.config["SESSION_COOKIE_HTTPONLY"] = True
 app.config["SESSION_COOKIE_SECURE"] = True
 app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
+app.config["SESSION_COOKIE_PATH"] = "/"
+app.config["SESSION_COOKIE_DOMAIN"] = ".techodyssey.dev"
+app.config["PERMANENT_SESSION_LIFETIME"] = 15780000
+
+
 
 # Flask OAuth initialization
 
