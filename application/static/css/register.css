@@ -147,10 +147,10 @@ button.primary-button {
 }
 
 .payment-info-container {
-    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 20px;
     max-width: 100%;
+    display: none;
 }
