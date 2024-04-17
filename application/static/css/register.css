@@ -146,7 +146,7 @@ button.primary-button {
     font-weight: 700;
 }
 
-.payment-info-container {
+#payment-info-container {
     flex-direction: column;
     justify-content: center;
     align-items: center;
