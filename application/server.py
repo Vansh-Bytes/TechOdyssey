@@ -512,10 +512,10 @@ def sitemap():
 
 
 @app.route("/stats")
-# @is_session_valid
+@is_session_valid
 def stats():
-    # if session["user"]["email"] != "om.2472004@gmail.com":
-    #     return abort(404)
+    if session["user"]["email"] != "om.2472004@gmail.com":
+        return abort(404)
     number_of_application_users = mongodb_cursor["users"].count_documents({})
     application_users = mongodb_cursor["users"].find({})
     number_of_event_registrations = mongodb_cursor["registrations"].count_documents({})
@@ -559,4 +559,4 @@ def internal_server_error(error):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
