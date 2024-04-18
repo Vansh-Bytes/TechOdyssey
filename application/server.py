@@ -167,7 +167,6 @@ app.config["SESSION_REDIS"] = redis.from_url(
     os.getenv("REDIS_URI"),
 )
 app.config["SESSION_PERMANENT"] = True
-app.config["SESSION_USE_SIGNER"] = True
 app.config["SESSION_KEY_PREFIX"] = "techodyssey-"
 app.config["SESSION_COOKIE_NAME"] = "techodyssey-session"
 app.config["SESSION_COOKIE_HTTPONLY"] = True
@@ -175,11 +174,7 @@ app.config["SESSION_COOKIE_SECURE"] = True
 app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
 app.config["SESSION_COOKIE_PATH"] = "/"
 app.config["SESSION_COOKIE_DOMAIN"] = ".techodyssey.dev"
-
-# Set session lifetime to 6 months (in seconds)
-six_months_in_seconds = 6 * 30 * 24 * 60 * 60
-app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(seconds=six_months_in_seconds)
-
+app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(days=30)
 # Optionally refresh the session each request
 app.config["SESSION_REFRESH_EACH_REQUEST"] = True
 
@@ -196,7 +191,7 @@ initialize_social_login(session, app, config)
 def before_request():
     if session.get("user") is not None:
         if session["user"].get("provider") is None:
-                session["user"] = generate_user_session(session["user"], "google")
+            session["user"] = generate_user_session(session["user"], "google")
 
 
 @app.after_request
