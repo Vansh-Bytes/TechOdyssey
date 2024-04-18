@@ -335,7 +335,7 @@ def api_register():
 
     event_name = event_reference.get(event_id)
 
-    if event_id in ["4", "5", "6"]:
+    if event_id in ["4", "5", "6", "1"]:
         team_name = form_data.get("teamName")
 
         team_members = form_data.get("teamMembers").split(",")
@@ -366,7 +366,7 @@ def api_register():
                 }
             )
 
-        if event_id in ["5", "6"] and len(team_members) != 4:
+        if event_id in ["5", "6", "1"] and len(team_members) != 4:
             return jsonify(
                 {
                     "status": "error",
@@ -423,7 +423,7 @@ def api_register():
     try:
         registrations = mongodb_cursor["registrations"]
 
-        if event_id in ["4", "5", "6"]:
+        if event_id in ["4", "5", "6", "1"]:
             existing_team = registrations.find_one(
                 {
                     "event": event_name,

@@ -16,7 +16,7 @@ function updateRegistration() {
     document.getElementById("payment-info-container").style.display = "flex";
 
     const teamDetails = document.getElementById("team-details");
-    teamDetails.style.display = selectedEvent === "4" || selectedEvent === "5" || selectedEvent === "6" ? "flex" : "none";
+    teamDetails.style.display = selectedEvent === "4" || selectedEvent === "5" || selectedEvent === "6" || selectedEvent === "1" ? "flex" : "none";
 
     if (selectedEvent === "4") {
         document.getElementById("team-member-5-name").style.display = "block";
@@ -47,7 +47,7 @@ function register() {
         teamMembers.push(document.getElementById("team-member-5-name").value.trim());
     }
 
-    if (event === "5" || event === "6") {
+    if (event === "5" || event === "6" || event === "1") {
         teamMembers.push(document.getElementById("team-member-1-name").value.trim());
         teamMembers.push(document.getElementById("team-member-2-name").value.trim());
         teamMembers.push(document.getElementById("team-member-3-name").value.trim());
@@ -59,14 +59,13 @@ function register() {
         return;
     }
 
-    if (["4", "5", "6"].includes(event) && (!teamName || !teamMembers)) {
+    if (["4", "5", "6", "1"].includes(event) && (!teamName || !teamMembers)) {
         alert("Please fill in the required fields: Team Name, Team Members");
         return;
     }
 
-    if (["4", "5", "6"].includes(event) && teamMembers.length !== (event === "4" ? 5 : 4)) {
-        alert(`To participate in ${event === "4" ? "Battle Blitz: Valorant" : "Battle Blitz: PUBG Mobile or Battle Blitz: Free Fire"}, you need to have ${event === "4" ? 5 : 4} members in your team`);
-        return;
+    if (["4", "5", "6", "1"].includes(event) && teamMembers.length !== (event === "4" ? 5 : 4)) {
+        alert(`To participate in ${event === "4" ? "Battle Blitz" : "Web Dash"}, you need to have a team of ${event === "4" ? 5 : 4} members`);
     }
 
     if (!paymentScreenshot) {
