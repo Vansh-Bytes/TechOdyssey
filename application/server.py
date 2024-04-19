@@ -178,6 +178,7 @@ app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(days=30)
 # Optionally refresh the session each request
 app.config["SESSION_REFRESH_EACH_REQUEST"] = True
 
+Session(app)
 
 # Flask OAuth initialization
 
