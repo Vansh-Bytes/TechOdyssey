@@ -19,6 +19,7 @@ from flask import (
     jsonify,
     request,
     abort,
+    send_from_directory,
 )
 
 # Helper functions
@@ -214,7 +215,7 @@ def after_request(response):
 
 @app.route("/favicon.ico")
 def favicon():
-    return redirect("https://storage.techodyssey.dev/favicon.ico")
+    return send_from_directory("static", "images/favicon.ico")
 
 
 @app.route("/")

@@ -8,12 +8,13 @@
 
     <!-- SEO meta tags -->
     <meta name="title" content="TechOdyssey">
-    <meta name="description" content="   ">
+    {% block meta_description %}
+    {% endblock %}
     <meta name="keywords" content="TechOdyssey, K.R. Mangalam University, Tech Fest, CSI Club">
     <meta name="robots" content="index, follow">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="language" content="English">
-    <meta name="revisit-after" content="7 days">
+    <meta name="revisit-after" content="1 days">
     <meta name="author" content="CSI Club, K.R. Mangalam University">
 
     <!-- Open Graph / Facebook -->
@@ -34,7 +35,7 @@
 
 
     <!-- Favicon -->
-    <link rel="icon" href="https://storage.techodyssey.dev/csi-logo.png" type="image/png">
+    <link rel="icon" href="https://storage.techodyssey.dev/favicon.ico" type="image/x-icon">
 
     <!-- CSS -->
     <link rel="stylesheet" href="{{url_for('static', filename='css/base.css')}}">
