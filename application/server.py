@@ -19,7 +19,6 @@ from flask import (
     jsonify,
     request,
     abort,
-    send_from_directory,
 )
 
 # Helper functions
@@ -168,6 +167,7 @@ app.config["SESSION_REDIS"] = redis.from_url(
     os.getenv("REDIS_URI"),
 )
 app.config["SESSION_PERMANENT"] = True
+app.config["SESSION_USE_SIGNER"] = True
 app.config["SESSION_KEY_PREFIX"] = "techodyssey-"
 app.config["SESSION_COOKIE_NAME"] = "techodyssey-session"
 app.config["SESSION_COOKIE_HTTPONLY"] = True
@@ -175,11 +175,14 @@ app.config["SESSION_COOKIE_SECURE"] = True
 app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
 app.config["SESSION_COOKIE_PATH"] = "/"
 app.config["SESSION_COOKIE_DOMAIN"] = ".techodyssey.dev"
-app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(days=30)
+
+# Set session lifetime to 6 months (in seconds)
+six_months_in_seconds = 6 * 30 * 24 * 60 * 60
+app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(seconds=six_months_in_seconds)
+
 # Optionally refresh the session each request
 app.config["SESSION_REFRESH_EACH_REQUEST"] = True
 
-Session(app)
 
 # Flask OAuth initialization
 
@@ -215,7 +218,7 @@ def after_request(response):
 
 @app.route("/favicon.ico")
 def favicon():
-    return send_from_directory("static", "images/favicon.ico")
+    return redirect("https://storage.techodyssey.dev/favicon.ico")
 
 
 @app.route("/")
@@ -532,6 +535,43 @@ def stats():
         application_users=application_users,
         event_registrations=event_registrations,
     )
+
+
+@app.route("/admin/<registration_id>/<action>")
+@is_session_valid
+def admin_action(registration_id, action):
+    if session["user"]["email"] != "om.2472004@gmail.com":
+        return abort(404)
+
+    registration = mongodb_cursor["registrations"].find_one({"_id": registration_id})
+
+    if registration is None:
+        return abort(404)
+
+    if action == "approve":
+        mongodb_cursor["registrations"].find_one_and_update(
+            {"_id": registration_id},
+            {
+                "$set": {
+                    "status": "approved",
+                }
+            },
+        )
+
+    elif action == "reject":
+        mongodb_cursor["registrations"].find_one_and_update(
+            {"_id": registration_id},
+            {
+                "$set": {
+                    "status": "rejected",
+                }
+            },
+        )
+
+    else:
+        return abort(404)
+
+    return redirect(url_for("stats"))
 
 
 # Error handlers
