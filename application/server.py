@@ -8,6 +8,7 @@ import sentry_sdk
 from functools import wraps
 from dotenv import load_dotenv
 from pymongo import MongoClient
+from bson import ObjectId
 from flask_session import Session
 from flask_social_oauth import Config, initialize_social_login
 from flask import (
@@ -183,6 +184,9 @@ app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(seconds=six_months_in_secon
 # Optionally refresh the session each request
 app.config["SESSION_REFRESH_EACH_REQUEST"] = True
 
+# Initialize session
+Session(app)
+
 
 # Flask OAuth initialization
 
@@ -250,7 +254,7 @@ def cancelation_policy():
 
 
 @app.route("/user/events")
-@is_session_valid
+# @is_session_valid
 def user_my_events():
     user_events = mongodb_cursor["registrations"].find(
         {"email": session["user"]["email"]}
@@ -543,14 +547,14 @@ def admin_action(registration_id, action):
     if session["user"]["email"] != "om.2472004@gmail.com":
         return abort(404)
 
-    registration = mongodb_cursor["registrations"].find_one({"_id": registration_id})
+    registration = mongodb_cursor["registrations"].find_one({"_id": ObjectId(registration_id)})
 
     if registration is None:
         return abort(404)
 
     if action == "approve":
         mongodb_cursor["registrations"].find_one_and_update(
-            {"_id": registration_id},
+            {"_id": ObjectId(registration_id)},
             {
                 "$set": {
                     "status": "approved",
@@ -560,7 +564,7 @@ def admin_action(registration_id, action):
 
     elif action == "reject":
         mongodb_cursor["registrations"].find_one_and_update(
-            {"_id": registration_id},
+            {"_id": ObjectId(registration_id)},
             {
                 "$set": {
                     "status": "rejected",

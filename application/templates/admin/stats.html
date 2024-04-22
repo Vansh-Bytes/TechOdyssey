@@ -14,6 +14,28 @@
 
 </div>
 
+<div class="registration-stats-container">
+    <h3>Event Registration Stats</h3>
+
+    {% for registration in event_registrations %}
+    <div class="registration-stats">
+        <div class="registration-info">
+            <p>Registration ID: {{ registration._id }}</p>
+            <p>Event Name: {{ registration.event }}</p>
+            <p>User Name: {{ registration.name }}</p>
+            <p>User Email: {{ registration.email }}</p>
+            <p>Approval Status: {{ registration.status | capitalize }}</p>
+            <p>Payment Screenshot: <a href="{{ registration.paymentScreenshot }}" target="_blank">View</a></p>
+            <br>
+            {% if registration.status == 'pending' %}
+            <button onclick="window.location.href='/admin/{{ registration._id }}/approve'">Approve</button>
+            <button onclick="window.location.href='/admin/{{ registration._id }}/reject'">Reject</button>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
 <div class="user-stats-container">
     <h3>User Stats</h3>
 
@@ -31,26 +53,6 @@
     {% endfor %}
 </div>
 
-<div class="registration-stats-container">
-    <h3>Event Registration Stats</h3>
 
-    {% for registration in event_registrations %}
-   <div class="registration-stats">
-    <div class="registration-info">
-        <p >Registration ID: {{ registration._id }}</p>
-        <p >Event Name: {{ registration.event }}</p>
-        <p >User Name: {{ registration.name }}</p>
-        <p >User Email: {{ registration.email }}</p>
-        <p >Approval Status: {{ registration.status | capitalize }}</p>
-        <p >Payment Screenshot: <a href="{{ registration.paymentScreenshot }}" target="_blank">View</a></p>
-        <br>
-        {% if registration.status == 'pending' %}
-        <button onclick="window.location.href='/admin/{{ registration._id }}/approve'">Approve</button>
-        <button onclick="window.location.href='/admin/{{ registration._id }}/reject'">Reject</button>
-        {% endif %}
-    </div>
-</div>
-    {% endfor %}
-</div>
 
 {% endblock %}
