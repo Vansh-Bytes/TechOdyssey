@@ -29,5 +29,28 @@
         </div>
     </div>
     {% endfor %}
+</div>
 
-    {% endblock %}
+<div class="registration-stats-container">
+    <h3>Event Registration Stats</h3>
+
+    {% for registration in event_registrations %}
+    <div class="registration-stats">
+        <div class="registration-info">
+            <p>Registration ID: {{ registration._id }}</p>
+            <p>Event Name: {{ registration.event }}</p>
+            <p>User Name: {{ registration.name }}</p>
+            <p>User Email: {{ registration.email }}</p>
+            <p>Approval Status: {{ registration.status | capitalize }}</p>
+            <p>Payment Screenshot: <a style="padding: 5px; background-color: #f1f1f1; border-radius: 5px; text-decoration: none;" href="{{ registration.paymentScreenshot }}">View</a></p>
+            <br>
+            {% if registration.status == 'pending' %}
+            <button onclick="window.location.href='/admin/{{ registration._id }}/approve'">Approve</button>
+            <button onclick="window.location.href='/admin/{{ registration._id }}/reject'">Reject</button>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
