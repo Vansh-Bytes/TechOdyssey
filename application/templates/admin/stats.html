@@ -35,18 +35,18 @@
     <h3>Event Registration Stats</h3>
 
     {% for registration in event_registrations %}
-   <div class="registration-stats" style="background-color: #222; color: #fff; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+   <div class="registration-stats">
     <div class="registration-info">
-        <p style="margin: 5px 0;">Registration ID: {{ registration._id }}</p>
-        <p style="margin: 5px 0;">Event Name: {{ registration.event }}</p>
-        <p style="margin: 5px 0;">User Name: {{ registration.name }}</p>
-        <p style="margin: 5px 0;">User Email: {{ registration.email }}</p>
-        <p style="margin: 5px 0;">Approval Status: {{ registration.status | capitalize }}</p>
-        <p style="margin: 5px 0;">Payment Screenshot: <a style="padding: 5px; background-color: #333; border-radius: 5px; text-decoration: none; color: #fff;" href="{{ registration.paymentScreenshot }}">View</a></p>
+        <p >Registration ID: {{ registration._id }}</p>
+        <p >Event Name: {{ registration.event }}</p>
+        <p >User Name: {{ registration.name }}</p>
+        <p >User Email: {{ registration.email }}</p>
+        <p >Approval Status: {{ registration.status | capitalize }}</p>
+        <p >Payment Screenshot: <a href="{{ registration.paymentScreenshot }}" target="_blank">View</a></p>
         <br>
         {% if registration.status == 'pending' %}
-        <button style="margin-right: 10px; background-color: #007bff; color: #fff; border: none; border-radius: 5px; padding: 5px 10px; cursor: pointer;" onclick="window.location.href='/admin/{{ registration._id }}/approve'">Approve</button>
-        <button style="background-color: #dc3545; color: #fff; border: none; border-radius: 5px; padding: 5px 10px; cursor: pointer;" onclick="window.location.href='/admin/{{ registration._id }}/reject'">Reject</button>
+        <button onclick="window.location.href='/admin/{{ registration._id }}/approve'">Approve</button>
+        <button onclick="window.location.href='/admin/{{ registration._id }}/reject'">Reject</button>
         {% endif %}
     </div>
 </div>

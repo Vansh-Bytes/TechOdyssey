@@ -75,6 +75,110 @@ main p {
     font-size: 1rem;
 }
 
+/* <div class="registration-stats-container">
+    <h3>Event Registration Stats</h3>
+
+    {% for registration in event_registrations %}
+   <div class="registration-stats" style="background-color: #222; color: #fff; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+    <div class="registration-info">
+        <p style="margin: 5px 0;">Registration ID: {{ registration._id }}</p>
+        <p style="margin: 5px 0;">Event Name: {{ registration.event }}</p>
+        <p style="margin: 5px 0;">User Name: {{ registration.name }}</p>
+        <p style="margin: 5px 0;">User Email: {{ registration.email }}</p>
+        <p style="margin: 5px 0;">Approval Status: {{ registration.status | capitalize }}</p>
+        <p style="margin: 5px 0;">Payment Screenshot: <a style="padding: 5px; background-color: #333; border-radius: 5px; text-decoration: none; color: #fff;" href="{{ registration.paymentScreenshot }}">View</a></p>
+        <br>
+        {% if registration.status == 'pending' %}
+        <button style="margin-right: 10px; background-color: #007bff; color: #fff; border: none; border-radius: 5px; padding: 5px 10px; cursor: pointer;" onclick="window.location.href='/admin/{{ registration._id }}/approve'">Approve</button>
+        <button style="background-color: #dc3545; color: #fff; border: none; border-radius: 5px; padding: 5px 10px; cursor: pointer;" onclick="window.location.href='/admin/{{ registration._id }}/reject'">Reject</button>
+        {% endif %}
+    </div>
+</div>
+    {% endfor %}
+</div> */
+
+.registration-stats-container {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+}
+
+.registration-stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    background-color: #000;
+    padding: 20px;
+    gap: 20px;
+    border-radius: 10px;
+}
+
+.registration-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.registration-info p {
+    margin: 5px 0;
+    font-size: 1rem;
+}
+
+.registration-info a {
+    padding: 10px 20px;
+    background-color: #333;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #fff;
+    margin-left: 5px;
+}
+
+button {
+    margin-right: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+button:active {
+    background-color: #0056b3;
+}
+
+button:focus {
+    outline: none;
+}
+
+button:last-child {
+    background-color: #dc3545;
+}
+
+button:last-child:hover {
+    background-color: #a71d2a;
+}
+
+button:last-child:active {
+    background-color: #a71d2a;
+}
+
+
+/* Media Queries */
+
+
 @media screen and (max-width: 768px) {
     main {
         padding: 10px;
@@ -109,4 +213,58 @@ main p {
     .user-info p {
         font-size: 0.8rem;
     }
+
+    .registration-stats-container {
+        gap: 10px;
+    }
+
+    .registration-stats {
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .registration-info p {
+        font-size: 0.8rem;
+    }
+
+    button {
+        padding: 5px 10px;
+    }
+
+    button:last-child {
+        padding: 5px 10px;
+    }
+
+    button:last-child:hover {
+        background-color: #a71d2a;
+    }
+
+    button:last-child:active {
+        background-color: #a71d2a;
+    }
+
+    button:focus {
+        outline: none;
+    }
+
+    button:last-child:focus {
+        outline: none;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    button:active {
+        background-color: #0056b3;
+    }
+
+    button:focus {
+        outline: none;
+    }
+
+    button:last-child:focus {
+        outline: none;
+    }
+
 }
