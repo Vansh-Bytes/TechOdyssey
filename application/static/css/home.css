@@ -526,9 +526,14 @@ a {
     .event {
         width: 100%;
     }
+    
 
     .sponsor-section {
         padding: 20px;
+    }
+
+    .sponsor-section h2 span {
+        font-size: 4rem;
     }
 
     .sponsor {
