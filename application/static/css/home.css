@@ -301,6 +301,15 @@ a {
     text-transform: uppercase;
 }
 
+.sponsors {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
 .sponsor {
     display: flex;
     flex-direction: row;
@@ -312,16 +321,17 @@ a {
     background: #000;
     border: 1px solid #FFF;
     transition: 0.3s;
-    width: 350px;
+    width: 400px;
     height: 350px;
 }
 
 .sponsor img {
-    width: 250px;
-    height: 250px;
+    width: 200px;
+    height: 200px;
     object-fit: contain;
     transition: 0.3s;
     animation: 0.3s;
+    padding: 20px;
 }
 
 .sponsor img:hover {
