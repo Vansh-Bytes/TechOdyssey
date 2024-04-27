@@ -15,6 +15,7 @@
         <li><a href="/register" class="register">Register</a></li>
         {% else %}
         <li><a href="/user/events">My Events</a></li>
+        <li><a href="/register" class="register">Register</a></li>
         <li>
             <div class="user_info">
                 <a href="/authentication/sign-out"><img src="{{session.user.user_avatar_url}}" alt="Profile Picture"
@@ -44,6 +45,7 @@
             <li><a href="/register" class="register mobile-nav-link">Register</a></li>
             {% else %}
             <li><a href="/user/events" class="mobile-nav-link">My Events</a></li>
+            <li><a href="/register" class="register">Register</a></li>
             {% endif %}
         </ul>
     </div>
