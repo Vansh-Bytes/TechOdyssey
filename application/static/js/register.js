@@ -121,7 +121,7 @@ function register() {
 function updatePaymentScreenshot() {
     const paymentScreenshotUpload = document.getElementById("payment-screenshot-upload");
 
-    paymentScreenshotUpload.innerHTML = "Screenshot Uploaded <i class='fas fa-check'></i>";
+    paymentScreenshotUpload.innerHTML = "<p>Screenshot Uploaded</p>";
 }
 
 
