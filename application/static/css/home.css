@@ -338,7 +338,7 @@ a {
     transform: scale(1.1);
 }
 
-.sponsor p {
+.sponsor h3 {
     font-size: 2rem;
     font-weight: 900;
     color: #FFF;
