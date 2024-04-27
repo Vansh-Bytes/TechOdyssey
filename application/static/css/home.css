@@ -308,7 +308,6 @@ a {
     justify-content: center;
     gap: 20px;
     flex-wrap: wrap;
-    padding: 20px;
 }
 
 .sponsor {
@@ -528,12 +527,16 @@ a {
         width: 100%;
     }
 
-    .sponsors {
+    .sponsor-section {
         padding: 20px;
     }
 
-    .sponsor-section h2 span {
-        font-size: 4rem;
+    .sponsor {
+        width: 100%;
     }
 
+    .sponsor img {
+        width: 200px;
+        height: 200px;
+    }
 }
