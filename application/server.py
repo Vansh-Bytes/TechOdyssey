@@ -533,7 +533,7 @@ def stats():
     number_of_event_registrations = mongodb_cursor["registrations"].count_documents({})
     event_registrations = mongodb_cursor["registrations"].find({})
     total_amount_received = 0
-    for registration in event_registrations:
+    for registration in mongodb_cursor["registrations"].find({}):
         if registration["status"] == "approved":
             if registration["event"] == "Code Clash":
                 total_amount_received += 150
@@ -543,12 +543,10 @@ def stats():
                 total_amount_received += 100
             elif registration["event"] == "Reel Craft":
                 total_amount_received += 100
-            elif (
-                registration["event"] == "Battle Blitz: Valorant"
-                or registration["event"] == "Battle Blitz: BGMI Mobile"
-                or registration["event"] == "Battle Blitz: Free Fire"
-            ):
+            else:
                 total_amount_received += 400
+        else:
+            continue
 
     return render_template(
         "admin/stats.html",
@@ -556,8 +554,7 @@ def stats():
         number_of_event_registrations=number_of_event_registrations,
         application_users=application_users,
         event_registrations=event_registrations,
-        total_amount_received=        <li><a href="/register" class="register">Register</a></li>
-,
+        total_amount_received=total_amount_received
     )
 
 
