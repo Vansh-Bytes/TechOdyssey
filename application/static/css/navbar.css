@@ -16,21 +16,32 @@ nav {
     display: flex;
     align-items: center;
     gap: 10px;
+    background-color: #FFF;
+    padding: 10px;
+    border-radius: 5px;
+    height: 60px;
 }
 
 nav .logo img {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     background-color: #fff;
     border-radius: 50%;
 }
 
 .krmu-logo {
-    width: 220px !important;
-    height: 50px;
-    background-color: #FFF !important;
+    width: 200px !important;
+    height: 45px !important;
     border-radius: 10px !important;  
     padding: 5px !important;  
+}
+
+.viksit-bharat-logo {
+    width: 100px !important;
+    height: 100px !important;
+    background-color: transparent !important;
+    border-radius: 10px !important;  
+    padding: 5px !important;
 }
 
 
@@ -190,6 +201,10 @@ nav ul li a:hover {
         background-color: #FFF !important;
         border-radius: 10px !important;  
         padding: 5px !important;
+    }
+
+    .viksit-bharat-logo {
+        display: none;
     }
 
     nav ul {
