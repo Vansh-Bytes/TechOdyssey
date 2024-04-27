@@ -48,7 +48,7 @@
             <div class="payment-screenshot" onclick="document.getElementById('payment-screenshot').click()"
                 style="cursor: pointer;">
                 <input id="payment-screenshot" name="payment-screenshot" type="file" accept=".png,.jpg,.jpeg,.gif"
-                    required style="display: none;">
+                    required style="display: none;" onchange="updatePaymentScreenshot()">
                 <div class="payment-screenshot-upload">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
                         <path

@@ -118,6 +118,13 @@ function register() {
         });
 }
 
+function updatePaymentScreenshot() {
+    const paymentScreenshotUpload = document.getElementById("payment-screenshot-upload");
+
+    paymentScreenshotUpload.innerHTML = "Screenshot Uploaded <i class='fas fa-check'></i>";
+}
+
+
 document.addEventListener("DOMContentLoaded", function () {
     const urlParams = new URLSearchParams(window.location.search);
     const event = urlParams.get("event");
@@ -138,3 +145,4 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 });
+
