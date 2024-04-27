@@ -30,6 +30,14 @@ function updateTime() {
         secondsRemaining = "0" + secondsRemaining;
     }
 
+    // Check if the target date has passed
+    if (timeRemaining === 0) {
+        daysRemaining = "00";
+        hoursRemaining = "00";
+        minutesRemaining = "00";
+        secondsRemaining = "00";
+    }
+
     document.getElementById("days").innerHTML = daysRemaining;
     document.getElementById("hours").innerHTML = hoursRemaining;
     document.getElementById("minutes").innerHTML = minutesRemaining;
