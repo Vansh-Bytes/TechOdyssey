@@ -532,12 +532,32 @@ def stats():
     application_users = mongodb_cursor["users"].find({})
     number_of_event_registrations = mongodb_cursor["registrations"].count_documents({})
     event_registrations = mongodb_cursor["registrations"].find({})
+    total_amount_received = 0
+    for registration in event_registrations:
+        if registration["status"] == "approved":
+            if registration["event"] == "Code Clash":
+                total_amount_received += 150
+            elif registration["event"] == "Web Dash":
+                total_amount_received += 200
+            elif registration["event"] == "Treasure Quest":
+                total_amount_received += 100
+            elif registration["event"] == "Reel Craft":
+                total_amount_received += 100
+            elif (
+                registration["event"] == "Battle Blitz: Valorant"
+                or registration["event"] == "Battle Blitz: BGMI Mobile"
+                or registration["event"] == "Battle Blitz: Free Fire"
+            ):
+                total_amount_received += 400
+
     return render_template(
         "admin/stats.html",
         number_of_application_users=number_of_application_users,
         number_of_event_registrations=number_of_event_registrations,
         application_users=application_users,
         event_registrations=event_registrations,
+        total_amount_received=        <li><a href="/register" class="register">Register</a></li>
+,
     )
 
 
@@ -547,7 +567,9 @@ def admin_action(registration_id, action):
     if session["user"]["email"] != "om.2472004@gmail.com":
         return abort(404)
 
-    registration = mongodb_cursor["registrations"].find_one({"_id": ObjectId(registration_id)})
+    registration = mongodb_cursor["registrations"].find_one(
+        {"_id": ObjectId(registration_id)}
+    )
 
     if registration is None:
         return abort(404)
