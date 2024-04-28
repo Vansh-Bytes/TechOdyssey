@@ -526,7 +526,7 @@ def sitemap():
 @app.route("/stats")
 @is_session_valid
 def stats():
-    if session["user"]["email"] != "om.2472004@gmail.com":
+    if session["user"]["email"] != "om.2472004@gmail.com" or session["user"]["email"] != "saswatdas1104@gmail.com":
         return abort(404)
     number_of_application_users = mongodb_cursor["users"].count_documents({})
     application_users = mongodb_cursor["users"].find({})
