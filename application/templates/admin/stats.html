@@ -24,6 +24,9 @@
             <p>Event Name: {{ registration.event }}</p>
             <p>User Name: {{ registration.name }}</p>
             <p>User Email: {{ registration.email }}</p>
+            {% if registration.teamMembers %}
+            <p>Team Members: {{ registration.teamMembers }}</p>
+            {% endif %}
             <p>Approval Status: {{ registration.status | capitalize }}</p>
             <p>Payment Screenshot: <a href="{{ registration.paymentScreenshot }}" target="_blank">View</a></p>
             <br>
