@@ -2,6 +2,8 @@ import os
 import uuid
 import redis
 import time
+import csv
+import io
 from datetime import timedelta
 import requests
 import sentry_sdk
@@ -20,6 +22,7 @@ from flask import (
     jsonify,
     request,
     abort,
+    Response,
 )
 
 # Helper functions
@@ -561,7 +564,7 @@ def stats():
 @app.route("/admin/<registration_id>/<action>")
 @is_session_valid
 def admin_action(registration_id, action):
-    if session["user"]["email"] != "om.2472004@gmail.com":
+    if session["user"]["email"] not in ["om.2472004@gmail.com", "saswatdas1104@gmail.com"]:
         return abort(404)
 
     registration = mongodb_cursor["registrations"].find_one(
@@ -595,6 +598,93 @@ def admin_action(registration_id, action):
         return abort(404)
 
     return redirect(url_for("stats"))
+
+
+@app.route("/admin/export/<type_of_data>")
+@is_session_valid
+def admin_export(type_of_data):
+    if session["user"]["email"] not in ["om.2472004@gmail.com", "saswatdas1104@gmail.com"]:
+        return abort(404)
+    total_registrations = mongodb_cursor["registrations"].find({})
+
+    if type_of_data == "student-info":
+        data = []
+        for registration in total_registrations:
+            if registration["event"] in ["Code Clash", "Treasure Quest", "Reel Craft"]:
+                data.append([
+                    registration["name"],
+                    registration["event"],
+                    registration["email"],
+                    registration["phone"],
+                ])
+            else:
+                for member in registration["teamMembers"]:
+                    if len(member) > 4:
+                        data.append([
+                            member,
+                            registration["event"],
+                            registration["email"],
+                            registration["phone"],
+                        ])
+
+        # Convert list to CSV
+        si = io.StringIO()
+        cw = csv.writer(si)
+        cw.writerow(["Student Name", "Event Name", "Student Email", "Student Phone"])  # CSV Header
+        cw.writerows(data)
+        output = si.getvalue()
+
+    elif type_of_data == "event-info":
+        data = {}
+        for registration in total_registrations:
+            event = registration["event"]
+            if event in data:
+                data[event]["Total Registrations"] += 1
+                if event == "Battle Blitz: Valorant":
+                    data[event]["Total Amount Received"] += 400
+                    data[event]["Number of Participants"] += 5
+                elif event == "Battle Blitz: BGMI Mobile" or event == "Battle Blitz: Free Fire":
+                    data[event]["Total Amount Received"] += 400
+                    data[event]["Number of Participants"] += 4
+                elif event == "Web Dash":
+                    data[event]["Total Amount Received"] += 200
+                    data[event]["Number of Participants"] += 4
+                elif event == "Code Clash":
+                    data[event]["Total Amount Received"] += 150
+                    data[event]["Number of Participants"] += 1
+                else:
+                    data[event]["Total Amount Received"] += 100
+                    data[event]["Number of Participants"] += 1
+            else:
+                # Initialize data structure for new events
+                initial_amount = 400 if event == "Battle Blitz: Valorant" else 400 if event in ["Battle Blitz: BGMI Mobile", "Battle Blitz: Free Fire"] else 200 if event == "Web Dash" else 150 if event == "Code Clash" else 100
+                participants = 5 if event == "Battle Blitz: Valorant" else 4 if event in ["Battle Blitz: BGMI Mobile", "Battle Blitz: Free Fire", "Web Dash"] else 1
+
+                data[event] = {
+                    "Total Registrations": 1,
+                    "Total Amount Received": initial_amount,
+                    "Number of Participants": participants, 
+                }
+
+        # Convert dict to CSV
+        si = io.StringIO()
+        cw = csv.writer(si)
+        cw.writerow(["Event", "Total Registrations", "Total Amount Received", "Number of Participants"])  # CSV Header
+        for key, val in data.items():
+            cw.writerow([key, val["Total Registrations"], val["Total Amount Received"], val["Number of Participants"]])
+        output = si.getvalue()
+
+    else:
+        return abort(404)
+    
+    return Response(output, mimetype="text/csv", headers={"Content-disposition": "attachment; filename=data.csv"})
+
+
+
+
+
+            
+        
 
 
 # Error handlers
