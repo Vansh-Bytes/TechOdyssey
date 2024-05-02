@@ -680,7 +680,12 @@ def admin_export(type_of_data):
     return Response(output, mimetype="text/csv", headers={"Content-disposition": "attachment; filename=data.csv"})
 
 
-
+@app.route("/clue")
+def clue():
+    return ("""zycyr rd yjicg, ajlfh nwsgc bw ulkq,
+ydgrc tqkkgw wgye'q zvczgb rzjsul,
+e uasdbxswr pevjvhp tq xfx pcdb,
+ecfwera mvz gkyvw, xfx ttpnh gk vvypr | VIGENERE""")
 
 
             
