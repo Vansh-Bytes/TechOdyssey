@@ -44,7 +44,7 @@ main {
 }
 
 .gallery-content .gallery-image {
-    width: 400px;
+    width: 600px;
     height: 250px;
     display: flex;
     justify-content: center;
