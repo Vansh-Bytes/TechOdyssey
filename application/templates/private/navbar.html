@@ -11,10 +11,10 @@
         <li><a href="/#events-section">Events</a></li>
         {% if session.get('user') is none %}
         <li><a href="/#faq's-section">FAQ's</a></li>
-        <li><a href="/register" class="register">Register</a></li>
+        <li><a href="/gallery" class="register">Gallery</a></li>
         {% else %}
         <li><a href="/user/events">My Events</a></li>
-        <li><a href="/register" class="register">Register</a></li>
+        <li><a href="/gallery" class="register">Gallery</a></li>
         <li>
             <div class="user_info">
                 <a href="/authentication/sign-out"><img src="{{session.user.user_avatar_url}}" alt="Profile Picture"
@@ -41,10 +41,10 @@
             <li><a href="/#events-section" class="mobile-nav-link">Events</a></li>
             <li><a href="/#faq's-section" class="mobile-nav-link">FAQ's</a></li>
             {% if session.get('user') is none %}
-            <li><a href="/register" class="register mobile-nav-link">Register</a></li>
+            <li><a href="/gallery" class="register mobile-nav-link">Gallery</a></li>
             {% else %}
             <li><a href="/user/events" class="mobile-nav-link">My Events</a></li>
-            <li><a href="/register" class="register">Register</a></li>
+            <li><a href="/gallery" class="register mobile-nav-link">Gallery</a></li>
             {% endif %}
         </ul>
     </div>
