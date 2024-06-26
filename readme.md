@@ -34,7 +34,7 @@ Ensure you have the following installed on your system:
 1. Clone the repository:
 
     ```sh
-    git clone https://github.com/yourusername/tech-odyssey.git
+    git clone [https://github.com/yourusername/tech-odyssey.git](https://github.com/Om-Mishra7/TechOdyssey.git)
     cd tech-odyssey
     ```
 
