@@ -194,6 +194,18 @@ def before_request():
         if session["user"].get("provider") is None:
             session["user"] = generate_user_session(session["user"], "google")
 
+@app.before_request
+def before_request():
+    if request.url.startswith("http://"):
+        url = request.url.replace("http://", "https://", 1)
+        return redirect(url, code=301)
+    
+@app.before_request
+def before_request():
+    # Block routes to pages, that are closed when the event is completed
+    if request.path in ["/register"]:
+        return abort(404)
+
 
 @app.after_request
 def after_request(response):
@@ -304,205 +316,205 @@ def gallery():
 # Registration routes
 
 
-# @app.route("/register")
-# @is_session_valid
-# def register():
-#     return render_template("public/register.html")
+@app.route("/register")
+@is_session_valid
+def register():
+    return render_template("public/register.html")
 
 
 # # Registration API routes
 
 
-# @app.route("/api/v1/register", methods=["POST"])
-# @is_session_valid
-# def api_register():
-#     event_reference = {
-#         "0": "Code Clash",
-#         "1": "Web Dash",
-#         "2": "Treasure Quest",
-#         "3": "Reel Craft",
-#         "4": "Battle Blitz: Valorant",
-#         "5": "Battle Blitz: BGMI Mobile",
-#         "6": "Battle Blitz: Free Fire",
-#     }
+@app.route("/api/v1/register", methods=["POST"])
+@is_session_valid
+def api_register():
+    event_reference = {
+        "0": "Code Clash",
+        "1": "Web Dash",
+        "2": "Treasure Quest",
+        "3": "Reel Craft",
+        "4": "Battle Blitz: Valorant",
+        "5": "Battle Blitz: BGMI Mobile",
+        "6": "Battle Blitz: Free Fire",
+    }
 
-#     form_data = request.form
-#     event_id = form_data.get("event")
+    form_data = request.form
+    event_id = form_data.get("event")
 
-#     if event_id is None:
-#         return jsonify(
-#             {"status": "error", "message": "Please select an event to register."}
-#         )
+    if event_id is None:
+        return jsonify(
+            {"status": "error", "message": "Please select an event to register."}
+        )
 
-#     event_name = event_reference.get(event_id)
+    event_name = event_reference.get(event_id)
 
-#     if event_id in ["4", "5", "6", "1"]:
-#         team_name = form_data.get("teamName")
+    if event_id in ["4", "5", "6", "1"]:
+        team_name = form_data.get("teamName")
 
-#         team_members = form_data.get("teamMembers").split(",")
+        team_members = form_data.get("teamMembers").split(",")
 
-#         for index, member in enumerate(team_members):
-#             team_members[index] = member.strip().title()
-#             if team_members[index] == "" or team_members[index] == " ":
-#                 team_members.pop(index)
+        for index, member in enumerate(team_members):
+            team_members[index] = member.strip().title()
+            if team_members[index] == "" or team_members[index] == " ":
+                team_members.pop(index)
 
-#         if len(team_members) == 0:
-#             return jsonify(
-#                 {
-#                     "status": "error",
-#                     "message": "Please provide the names of all team members.",
-#                 }
-#             )
+        if len(team_members) == 0:
+            return jsonify(
+                {
+                    "status": "error",
+                    "message": "Please provide the names of all team members.",
+                }
+            )
 
-#         if team_name is None:
-#             return jsonify(
-#                 {"status": "error", "message": "Please provide a team name."}
-#             )
+        if team_name is None:
+            return jsonify(
+                {"status": "error", "message": "Please provide a team name."}
+            )
 
-#         if event_id == "4" and len(team_members) != 5:
-#             return jsonify(
-#                 {
-#                     "status": "error",
-#                     "message": "To participate in Battle Blitz: Valorant, you need to have 5 members in your team.",
-#                 }
-#             )
+        if event_id == "4" and len(team_members) != 5:
+            return jsonify(
+                {
+                    "status": "error",
+                    "message": "To participate in Battle Blitz: Valorant, you need to have 5 members in your team.",
+                }
+            )
 
-#         if event_id in ["5", "6", "1"] and len(team_members) != 4:
-#             return jsonify(
-#                 {
-#                     "status": "error",
-#                     "message": "To participate in Battle Blitz: BGMI Mobile or Battle Blitz: Free Fire, you need to have 4 members in your team.",
-#                 }
-#             )
+        if event_id in ["5", "6", "1"] and len(team_members) != 4:
+            return jsonify(
+                {
+                    "status": "error",
+                    "message": "To participate in Battle Blitz: BGMI Mobile or Battle Blitz: Free Fire, you need to have 4 members in your team.",
+                }
+            )
 
-#         if session["user"]["name"].strip().title() not in team_members:
-#             return jsonify(
-#                 {
-#                     "status": "error",
-#                     "message": "You need to be part of the team to register for the event. Please provide your name in the team members list.",
-#                 }
-#             )
+        if session["user"]["name"].strip().title() not in team_members:
+            return jsonify(
+                {
+                    "status": "error",
+                    "message": "You need to be part of the team to register for the event. Please provide your name in the team members list.",
+                }
+            )
 
-#     if form_data.get("phone") is None:
-#         return jsonify(
-#             {"status": "error", "message": "Please provide your phone number."}
-#         )
+    if form_data.get("phone") is None:
+        return jsonify(
+            {"status": "error", "message": "Please provide your phone number."}
+        )
 
-#     if form_data.get("phone").strip() == "":
-#         return jsonify(
-#             {"status": "error", "message": "Please provide a valid phone number."}
-#         )
+    if form_data.get("phone").strip() == "":
+        return jsonify(
+            {"status": "error", "message": "Please provide a valid phone number."}
+        )
 
-#     if len(form_data.get("phone").strip()) != 10:
-#         return jsonify(
-#             {
-#                 "status": "error",
-#                 "message": "Please provide a valid 10-digit phone number.",
-#             }
-#         )
+    if len(form_data.get("phone").strip()) != 10:
+        return jsonify(
+            {
+                "status": "error",
+                "message": "Please provide a valid 10-digit phone number.",
+            }
+        )
 
-#     if request.files.get("paymentScreenshot") is None:
-#         return jsonify(
-#             {"status": "error", "message": "Please provide the payment screenshot."}
-#         )
+    if request.files.get("paymentScreenshot") is None:
+        return jsonify(
+            {"status": "error", "message": "Please provide the payment screenshot."}
+        )
 
-#     payment_transaction_id = form_data.get("paymentTransactionId")
-#     if payment_transaction_id is None:
-#         return jsonify(
-#             {"status": "error", "message": "Please provide the payment transaction ID."}
-#         )
+    payment_transaction_id = form_data.get("paymentTransactionId")
+    if payment_transaction_id is None:
+        return jsonify(
+            {"status": "error", "message": "Please provide the payment transaction ID."}
+        )
 
-#     payment_screenshot_url = image_uploader(request.files.get("paymentScreenshot"))
-#     if payment_screenshot_url is None:
-#         return jsonify(
-#             {
-#                 "status": "error",
-#                 "message": "An error occurred while uploading the payment screenshot. Please try again.",
-#             }
-#         )
+    payment_screenshot_url = image_uploader(request.files.get("paymentScreenshot"))
+    if payment_screenshot_url is None:
+        return jsonify(
+            {
+                "status": "error",
+                "message": "An error occurred while uploading the payment screenshot. Please try again.",
+            }
+        )
 
-#     try:
-#         registrations = mongodb_cursor["registrations"]
+    try:
+        registrations = mongodb_cursor["registrations"]
 
-#         if event_id in ["4", "5", "6", "1"]:
-#             existing_team = registrations.find_one(
-#                 {
-#                     "event": event_name,
-#                     "teamName": form_data.get("teamName").strip().title(),
-#                 }
-#             )
-#             if existing_team:
-#                 return jsonify(
-#                     {
-#                         "status": "error",
-#                         "message": f"The team name `{form_data.get('teamName').strip().title()}` has already been registered for this event. Please provide a different team name.",
-#                     }
-#                 )
+        if event_id in ["4", "5", "6", "1"]:
+            existing_team = registrations.find_one(
+                {
+                    "event": event_name,
+                    "teamName": form_data.get("teamName").strip().title(),
+                }
+            )
+            if existing_team:
+                return jsonify(
+                    {
+                        "status": "error",
+                        "message": f"The team name `{form_data.get('teamName').strip().title()}` has already been registered for this event. Please provide a different team name.",
+                    }
+                )
 
-#             if registrations.find_one(
-#                 {
-#                     "event": event_name,
-#                     "email": session["user"]["email"],
-#                 }
-#             ):
-#                 return jsonify(
-#                     {
-#                         "status": "error",
-#                         "message": "You have already registered for this event. You can view your registration status in the `My Events` section.",
-#                     }
-#                 )
+            if registrations.find_one(
+                {
+                    "event": event_name,
+                    "email": session["user"]["email"],
+                }
+            ):
+                return jsonify(
+                    {
+                        "status": "error",
+                        "message": "You have already registered for this event. You can view your registration status in the `My Events` section.",
+                    }
+                )
 
-#             registrations.insert_one(
-#                 {
-#                     "event": event_name,
-#                     "name": form_data.get("name").strip().title(),
-#                     "email": form_data.get("email").strip().lower(),
-#                     "phone": form_data.get("phone"),
-#                     "teamName": form_data.get("teamName").strip().title(),
-#                     "teamMembers": team_members,
-#                     "paymentScreenshot": payment_screenshot_url,
-#                     "paymentTransactionId": payment_transaction_id,
-#                     "status": "pending",
-#                 }
-#             )
+            registrations.insert_one(
+                {
+                    "event": event_name,
+                    "name": form_data.get("name").strip().title(),
+                    "email": form_data.get("email").strip().lower(),
+                    "phone": form_data.get("phone"),
+                    "teamName": form_data.get("teamName").strip().title(),
+                    "teamMembers": team_members,
+                    "paymentScreenshot": payment_screenshot_url,
+                    "paymentTransactionId": payment_transaction_id,
+                    "status": "pending",
+                }
+            )
 
-#         else:
-#             if registrations.find_one(
-#                 {"event": event_name, "email": form_data.get("email").strip().lower()}
-#             ):
-#                 return jsonify(
-#                     {
-#                         "status": "error",
-#                         "message": "You have already registered for this event. You can view your registration status in the `My Events` section.",
-#                     }
-#                 )
+        else:
+            if registrations.find_one(
+                {"event": event_name, "email": form_data.get("email").strip().lower()}
+            ):
+                return jsonify(
+                    {
+                        "status": "error",
+                        "message": "You have already registered for this event. You can view your registration status in the `My Events` section.",
+                    }
+                )
 
-#             registrations.insert_one(
-#                 {
-#                     "event": event_name,
-#                     "name": form_data.get("name").strip().title(),
-#                     "email": form_data.get("email").strip().lower(),
-#                     "phone": form_data.get("phone"),
-#                     "paymentScreenshot": payment_screenshot_url,
-#                     "paymentTransactionId": payment_transaction_id,
-#                     "status": "pending",
-#                 }
-#             )
+            registrations.insert_one(
+                {
+                    "event": event_name,
+                    "name": form_data.get("name").strip().title(),
+                    "email": form_data.get("email").strip().lower(),
+                    "phone": form_data.get("phone"),
+                    "paymentScreenshot": payment_screenshot_url,
+                    "paymentTransactionId": payment_transaction_id,
+                    "status": "pending",
+                }
+            )
 
-#         return jsonify(
-#             {
-#                 "status": "success",
-#                 "message": "Registration successful. Please wait while our team verifies your payment.",
-#             }
-#         )
+        return jsonify(
+            {
+                "status": "success",
+                "message": "Registration successful. Please wait while our team verifies your payment.",
+            }
+        )
 
-#     except Exception as e:
-#         return jsonify(
-#             {
-#                 "status": "error",
-#                 "message": "An error occurred while registering. Please try again.",
-#             }
-#         )
+    except Exception as e:
+        return jsonify(
+            {
+                "status": "error",
+                "message": "An error occurred while registering. Please try again.",
+            }
+        )
 
 
 # Site map routes
@@ -680,9 +692,6 @@ def clue():
 ydgrc tqkkgw wgye'q zvczgb rzjsul,
 e uasdbxswr pevjvhp tq xfx pcdb,
 ecfwera mvz gkyvw, xfx ttpnh gk vvypr | VIGENERE""")
-
-
-            
         
 
 
@@ -716,4 +725,4 @@ def internal_server_error(error):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", debug=False)
