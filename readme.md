@@ -1,5 +1,4 @@
-
-![KRMU Logo](https://github.com/Om-Mishra7/TechOdyssey/assets/96434205/adce8c05-ce58-43e7-98fb-296a64ad6d82)
+![KRMU Logo](https://github.com/Om-Mishra7/TechOdyssey/assets/96434205/5dc2dc54-2bfc-4a63-8f36-427d816d3ce1)
 
 ## Introduction
 
