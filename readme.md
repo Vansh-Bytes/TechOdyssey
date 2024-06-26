@@ -1,5 +1,3 @@
-![KRMU Logo](https://github.com/Om-Mishra7/TechOdyssey/assets/96434205/5dc2dc54-2bfc-4a63-8f36-427d816d3ce1)
-
 ## Introduction
 
 TechOdyssey is the annual technical fest organized by the Computer Society of India at K.R. Mangalam University. It serves as a platform for upcoming tech enthusiasts to showcase their skills and compete with peers in various events such as web development, competitive coding, e-sports, treasure hunts, quizzes, and more.
